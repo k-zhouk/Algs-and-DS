@@ -4,33 +4,34 @@ namespace BST_Tree
 {
     class BST_Tree
     {
+        // Pointer to the root of the tree
         private BST_Node root;
-        // Constructors
-        public BST_Tree(BST_Node node)
-        {
-            root = node;
-        }
 
+        #region Constructors
         public BST_Tree()
         {
             root = null;
         }
 
-        // Node to store a current node
-        private BST_Node currentNode = default;
-        // Node to store a parent node in the Find method
-        private BST_Node parentNode = default;
+        public BST_Tree(int value)
+        {
+            root= new BST_Node(value);
+        }
+        #endregion
 
         #region Main BST methods
-        public void Add(BST_Node newNode)
+        // Method adds a new node to the tree
+        public void Add(int newValue)
         {
+            BST_Node newNode = new BST_Node(newValue);
+
             if (root == null)
             {
                 root = newNode;
                 return;
             }
 
-            currentNode = root;
+            BST_Node currentNode = root;
             while (!(currentNode is null))
             {
                 if (newNode.value < currentNode.value)
@@ -51,17 +52,17 @@ namespace BST_Tree
                     }
                     else currentNode = currentNode.RightNode;
                 }
-
                 // Break if the value is already in the tree
                 else if (currentNode.value == newNode.value) break;
             }
         }
 
         // Returns true if the node with the value specified is in the tree and false otherwise
-        public bool CheckPresense(BST_Node node)
+        public bool CheckPresense(int value)
         {
+            BST_Node node = new BST_Node(value);
             // Start search from the root node
-            currentNode = root;
+            BST_Node currentNode = root;
             while (currentNode != null)
             {
                 if (currentNode.value == node.value)
@@ -86,26 +87,27 @@ namespace BST_Tree
             root = null;
         }
 
-        // Method deletes a node and its left and right subtrees. If a node is not in the tree, the method returns false and true otherwise
-        public bool DeleteSubtree(BST_Node node)
+        // Method deletes a node with its subtrees. If a node to be deleted is not in the tree, the method returns false and true otherwise
+        public bool DeleteSubtree(int value)
         {
+            BST_Node node = new BST_Node(value);
             // Case 1: the tree is empty
             if (root is null)
             {
                 return false;
             }
 
-            // Case 2: the root is deleted
+            // Case 2: the root is being deleted
             if (root.value == node.value)
             {
                 root = null;
                 return true;
             }
 
-            // Case 3: some node is deleted
+            // Case 3: some random node is deleted
             bool isRight = false;
-            parentNode = null;
-            currentNode = root;
+            BST_Node parentNode = null;
+            BST_Node currentNode = root;
 
             while (!(currentNode is null))
             {
@@ -134,13 +136,17 @@ namespace BST_Tree
         }
 
         // Method deletes a specific node
-        public void DeleteNode(BST_Node node)
+        public void DeleteNode(int value)
         {
-            // Start search from the root node
-            currentNode = root;
+            throw new NotImplementedException();
 
-            // Node to track the part node
-            parentNode = currentNode;
+            BST_Node node = new BST_Node(value);
+
+            // Start search from the root node
+            BST_Node currentNode = root;
+
+            // Node to track the parent node
+            BST_Node parentNode = currentNode;
 
             while (currentNode != null)
             {
@@ -165,7 +171,7 @@ namespace BST_Tree
         }
         #endregion
 
-        #region Main BST properties
+        #region Main tree properties
         // The readonly property contains the number of elements in the tree.
         private uint _count = 0;
         public uint Count
@@ -178,13 +184,14 @@ namespace BST_Tree
             }
         }
         
-        // Method returns number of items in the tree by traversal
+        // Method returns number of items in the tree
+        // The number of the items is counted by traversing the tree
         private void GetCount(BST_Node node)
         {
             if (node is null)
             {
                 return;
-            // Every time we visit a node that is not null, we increase the private _count counter
+            // Every time we visit a node that is not null, we increase the private _count variable (extrnal to the method)
             } else _count++;
             
             GetCount(node.LeftNode);
@@ -193,7 +200,7 @@ namespace BST_Tree
             return;
         }
 
-        // The property returns the height of the tree
+        // The read-only property contains the height of the tree
         public uint Height
         {
             get => GetHeigh();
@@ -204,29 +211,35 @@ namespace BST_Tree
         {
             uint height = 0;
             throw new NotImplementedException();
+
+            return height;
         }
         #endregion
 
         #region Support methods
+
+        // Method prints the content of the tree
         public void Print()
         {
             throw new NotImplementedException();
         }
         #endregion
-    }
 
-    class BST_Node
-    {
-        public BST_Node(int value)
+        #region BST Node class implementation
+        // For now the class is working with int numbers only
+        class BST_Node
         {
-            this.value = value;
+            // Constructor
+            public BST_Node(int value)
+            {
+                this.value = value;
+            }
+
+            public int value;
+
+            public BST_Node LeftNode { get; set; }
+            public BST_Node RightNode { get; set; }
         }
-
-        public int value;
-
-        // public BST_Node ParentNode { get; set; }
-        public BST_Node LeftNode { get; set; }
-        public BST_Node RightNode { get; set; }
+        #endregion
     }
-
 }
