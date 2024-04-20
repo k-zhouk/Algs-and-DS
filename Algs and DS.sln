@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33801.447
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList", "LinkedList\LinkedList.csproj", "{1EDDBED4-8C4B-4EE0-AF7D-9CF510A71DE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoublyLinkedList", "DoublyLinkedList\DoublyLinkedList.csproj", "{5D8DC3FF-0C6F-4A72-BFBA-737E8FD460F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortedLinkedList", "SortedLinkedList\SortedLinkedList.csproj", "{5B05B6CD-A620-4DC9-9873-2DAC999DFD87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BST_Tree", "BST_Tree\BST_Tree.csproj", "{3CBAC045-4263-4577-B6A2-8B8802ACC09E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,14 @@ Global
 		{5B05B6CD-A620-4DC9-9873-2DAC999DFD87}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B05B6CD-A620-4DC9-9873-2DAC999DFD87}.Release|x64.ActiveCfg = Release|Any CPU
 		{5B05B6CD-A620-4DC9-9873-2DAC999DFD87}.Release|x64.Build.0 = Release|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Debug|x64.Build.0 = Debug|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Release|x64.ActiveCfg = Release|Any CPU
+		{3CBAC045-4263-4577-B6A2-8B8802ACC09E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
