@@ -6,55 +6,71 @@ using System.Threading.Tasks;
 
 namespace SortedLinkedList
 {
-    sealed class Node
-    {
-        public int Value { get; set; }
-        public Node nextNode;
-        public Node()
-        {
-            this.Value = default;
-            nextNode = null;
-        }
-        public Node(int value)
-        {
-            this.Value = value;
-            nextNode = null;
-        }
-    }
     class SortedLinkedList
     {
-        private int nodesCounter;
-        private Node head;
-        private Node tail;
+        private Node head, tail;
+
         public SortedLinkedList()
         {
             head = tail = null;
-            nodesCounter = 0;
+            _nodesCounter = 0;
         }
-        public SortedLinkedList(Node newNode)
-        {
-            head = tail = newNode;
-            nodesCounter = 1;
-        }
-        public void AddNode(Node newNode)
-        {
-            if (nodesCounter == 0)
-            {
-                head = tail = newNode;
-                nodesCounter = 1;
-            }
-            else
-            {
-                Node currentNode = head;
-                while (currentNode != null)
-                {
 
+        public SortedLinkedList(int value)
+        {
+            Node node = new Node(value);
+            head = tail = node;
+
+            _nodesCounter = 1;
+        }
+
+        public void AddNode(int value)
+        {
+            Node node = new Node(value);
+
+            // Case 1: the list is empty
+            if (head is null)
+            {
+                head = tail = node;
+                _nodesCounter = 1;
+            }
+
+            Node currentNode = head;
+
+            while(currentNode != null)
+            {
+                if(currentNode.Value == value)
+                {
+                    node.nextNode = currentNode.nextNode;
                 }
             }
         }
+
         private Node FindPosition()
         {
             return new Node();
+        }
+
+        #region *************** Class properties ***************
+        public int Count
+        {
+            get => _nodesCounter;
+        }
+        private int _nodesCounter;
+        #endregion
+
+        class Node
+        {
+            public Node() { }
+
+            public Node(int value)
+            {
+                Value = value;
+                nextNode = null;
+            }
+
+            public int Value { get; set; }
+            public Node nextNode;
         }
     }
 }

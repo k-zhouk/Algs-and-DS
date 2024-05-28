@@ -3,35 +3,10 @@
 namespace LinkedList
 {
     /// <summary>
-    /// The Node class implements a linked list node.
-    /// The node contains a value and a link to the next node.
-    /// </summary>
-    sealed class Node
-    {
-        public int value;
-        public Node nextNode;
-
-        #region Constructors
-        public Node()
-        {
-            value = default;
-            nextNode = null;
-        }
-
-        public Node(int value)
-        {
-            this.value = value;
-            nextNode = null;
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// This class implements a singly linked list or just a linked list
+    /// This class implements a singly linked list
     /// </summary>
     class LinkedList
     {
-        private int nodesCounter = 0;
         private Node head, tail;
 
         #region ********** Constructors **********
@@ -39,17 +14,20 @@ namespace LinkedList
         {
             head = tail = null;
         }
-        public LinkedList(Node node)
+
+        public LinkedList(int value)
         {
-            nodesCounter = 1;
+            Node node = new Node(value);
+            _nodesCounter = 1;
             head = tail = node;
         }
         #endregion
 
         #region ********** Adding elements **********
-        public void AddFirst(Node node)
+        public void AddFirst(int value)
         {
-            if (head == null)
+            Node node = new Node(value);
+            if (head is null)
             {
                 head = tail = node;
             }
@@ -58,11 +36,13 @@ namespace LinkedList
                 node.nextNode = head;
                 head = node;
             }
-            nodesCounter++;
-        } // end of AddFirst
-        public void AddLast(Node node)
+            _nodesCounter++;
+        }
+
+        public void AddLast(int value)
         {
-            if (head == null)
+            Node node = new Node(value);
+            if (head is null)
             {
                 head = tail = node;
             }
@@ -71,35 +51,65 @@ namespace LinkedList
                 tail.nextNode = node;
                 tail = node;
             }
-            nodesCounter++;
-        } // end of AddLast
-        public void AddBefore(Node beforeNode, Node node)
-        {
-            throw new NotImplementedException("The AddBefore() method is not implemented yet");
+            _nodesCounter++;
         }
-        public bool AddAfter(Node afterNode, Node newNode)
+
+        public void AddBefore(int newValue, int value)
         {
-            if (nodesCounter == 0)
+            Node node = new Node(value);
+            // Case 1: head is empty, so it's a new node in the list
+            if (head is null)
             {
-                AddFirst(newNode);
+                head = head = node;
+            }
+            // Case 2: the search value is the head value
+            else if (head.Value == value)
+            {
+                node.nextNode = head;
+                head = node;
+            }
+            // Case 3: the search value is somewhere in the list
+            else
+            {
+                Node currentNode = head.nextNode;
+                Node previousNode = head;
+                while (currentNode != null)
+                {
+                    if (currentNode.Value == value)
+                    {
+                        node.nextNode = currentNode;
+                        previousNode.nextNode = node;
+                    }
+                }
+            }
+
+            _nodesCounter++;
+        }
+
+        public bool AddAfter(int afterValue, int value)
+        {
+            if (_nodesCounter == 0)
+            {
+                AddFirst(value);
                 return true;
             }
             else
             {
+                Node node = new Node(value);
                 Node currentNode = new Node();
                 currentNode = head;
 
                 while (currentNode != null)
                 {
-                    if (currentNode.value == afterNode.value)
+                    if (currentNode.Value == afterValue)
                     {
-                        newNode.nextNode = currentNode.nextNode;
-                        currentNode.nextNode = newNode;
-                        nodesCounter++;
+                        node.nextNode = currentNode.nextNode;
+                        currentNode.nextNode = node;
+                        _nodesCounter++;
 
-                        if (currentNode.value == tail.value)
+                        if (currentNode.Value == tail.Value)
                         {
-                            tail = newNode;
+                            tail = node;
                         }
                         return true;
                     }
@@ -116,13 +126,14 @@ namespace LinkedList
             if (head != null)
             {
                 head = head.nextNode;
-                nodesCounter--;
+                _nodesCounter--;
             }
             else
             {
                 Console.WriteLine("The linked list is empty. Nothing to delete");
             }
         }
+
         public void DeleteLastNode()
         {
             if (tail != null)
@@ -135,41 +146,42 @@ namespace LinkedList
                 }
                 currentNode.nextNode = null;
                 tail = currentNode;
-                nodesCounter--;
+                _nodesCounter--;
             }
             else
             {
                 Console.WriteLine("The linked list is empty. Nothing to delete");
             }
         }
+
         /// <summary>
         /// The method returns deletes a node before a specified one and returns true, if
         /// the node has been deleted. Otherwise it returns false
         /// </summary>
         /// <param name="refNode"></param>
         /// <returns></returns>
-        public bool DeleteBefore(Node refNode)
+        public bool DeleteBefore(int value)
         {
-//            throw new NotImplementedException("The DeleteBefore() method is not implemented yet");
-            
+            Node node = new Node(value);
+
             // Check if the list is empty
-            if (head==null)
+            if (head == null)
             {
                 Console.WriteLine("The list is empty. Nothing to delete");
                 return false;
             }
             // Check if the reference node is the first node
-            else if (head.value == refNode.value)
+            else if (head.Value == node.Value)
             {
                 Console.WriteLine("This is the first node. Deletion is not possible");
                 return false;
             }
             // Check if the 2nd node is our node
-            else if(head.nextNode.value== refNode.value)
+            else if (head.nextNode.Value == node.Value)
             {
                 DeleteFirstNode();
-                nodesCounter--;
-                return true; 
+                _nodesCounter--;
+                return true;
             }
             else
             {
@@ -179,32 +191,33 @@ namespace LinkedList
 
                 while (currentNode != null)
                 {
-                    if(currentNode.value== refNode.value)
+                    if (currentNode.Value == node.Value)
                     {
                         Node newCurrentNode = head;
-                        while (newCurrentNode.nextNode.value != prevNode.value)
+                        while (newCurrentNode.nextNode.Value != prevNode.Value)
                         {
                             newCurrentNode = newCurrentNode.nextNode;
                         }
                         newCurrentNode.nextNode = currentNode;
-                        nodesCounter--;
+                        _nodesCounter--;
                         return true;
                     }
                     prevNode = currentNode;
                     currentNode = currentNode.nextNode;
-                }                
+                }
             }
             return false;
         }
-        public bool DeleteAfter(Node refNode)
+        public bool DeleteAfter(int value)
         {
-            if (nodesCounter == 0)
+            Node node = new Node(value);
+            if (_nodesCounter == 0)
             {
                 Console.WriteLine("The list is empty. Nothing to delete");
                 return false;
             }
             // Check if our node is the last one
-            else if(tail.value== refNode.value)
+            else if (tail.Value == node.Value)
             {
                 Console.WriteLine("This is the last node. Node possible to delete.");
                 return false;
@@ -214,18 +227,18 @@ namespace LinkedList
                 Node currentNode = head;
                 while (currentNode != null)
                 {
-                    if (currentNode.value == refNode.value)
+                    if (currentNode.Value == node.Value)
                     {
                         if (currentNode.nextNode.nextNode == null)
                         {
                             DeleteLastNode();
-                            nodesCounter--;
+                            _nodesCounter--;
                             return true;
                         }
                         else
                         {
                             currentNode.nextNode = currentNode.nextNode.nextNode;
-                            nodesCounter--;
+                            _nodesCounter--;
                             return true;
                         }
                     }
@@ -234,28 +247,58 @@ namespace LinkedList
             }
             return false;
         }
+
         public void DeleteFirstOccurrence()
         {
             throw new NotImplementedException("The DeleteFirstOccurrence() method is not implemented yet");
         }
+
         public void DeleteAllOccurrences()
         {
             throw new NotImplementedException("The DeleteAllOccurrences() method is not implemented yet");
         }
-        public void Clear()
+
+        /// <summary>
+        /// The method clears the list
+        /// </summary>
+        public void ClearList()
         {
             head = tail = null;
-            nodesCounter = 0;
+            _nodesCounter = 0;
         }
         #endregion
-        public bool Contains(int value)
-        {
-            Node currentNode = new Node();
-            currentNode = head;
 
+        #region ********** Other list methods **********
+        /// <summary>
+        /// The method prints the values of the list if it's not empty
+        /// </summary>
+        public void PrintList()
+        {
+            if (_nodesCounter == 0)
+            {
+                Console.WriteLine($"The linked list is empty");
+                return;
+            }
+
+            Node currentNode = head;
             while (currentNode != null)
             {
-                if (currentNode.value == value)
+                Console.Write(" " + currentNode.Value);
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        /// <summary>
+        /// The method returns true if a value is in the list and false otherwise
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool Contains(int value)
+        {
+            Node currentNode = head;
+            while (currentNode != null)
+            {
+                if (currentNode.Value == value)
                 {
                     return true;
                 }
@@ -266,43 +309,52 @@ namespace LinkedList
             }
             return false;
         }
-        public void PrintList()
-        {
-            Node currentNode = head;
+        #endregion
 
-            Console.Write("Linked list values are:");
-            while (currentNode != null)
-            {
-                Console.Write(" "+ currentNode.value);
-                currentNode = currentNode.nextNode;
-            }
-            Console.Write($". Total elements count: {nodesCounter}\n");
-        }
         #region ********** Properties **********
         /// <summary>
-        /// The read-only property returns a number of elements in the list
+        /// The read-only property returns a number of nodes in the list
         /// </summary>
-        public int Count
+        public uint Count
         {
-            get { return nodesCounter; }
+            get => _nodesCounter;
+        }
+        private uint _nodesCounter;
 
-        }
         /// <summary>
-        /// The read-only property returns the last element of the list
+        /// The read-only property returns the value of the head node, it could be a number or a null, if the list is empty
         /// </summary>
         /// <returns></returns>
-        public Node LastNode
+        public int? HeadValue
         {
-            get { return tail; }
+            get => head?.Value;
         }
+
         /// <summary>
-        /// The read-only property returns the first element of the list
+        /// The read-only property returns the value of the tail node, it could be a number or a null, if the list is empty
         /// </summary>
-        /// <returns></returns>
-        public Node FirstNode
+        public int? TailValue
         {
-            get { return head; }
+            get => tail?.Value;
         }
         #endregion
+
+        /// <summary>
+        /// The internal Node class implements a linked list node.
+        /// The node contains a value and a link to the next node.
+        /// </summary>
+        class Node
+        {
+            public Node() { }
+
+            public Node(int value)
+            {
+                Value = value;
+                nextNode = null;
+            }
+
+            public int Value { get; set; }
+            public Node nextNode;
+        }
     }
 }
