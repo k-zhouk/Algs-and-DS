@@ -56,66 +56,53 @@ namespace LinkedList
 
         public void AddBefore(int newValue, int value)
         {
-            Node node = new Node(value);
-            // Case 1: head is empty, so it's a new node in the list
             if (head is null)
             {
-                head = head = node;
-            }
-            // Case 2: the search value is the head value
-            else if (head.Value == value)
-            {
-                node.nextNode = head;
-                head = node;
-            }
-            // Case 3: the search value is somewhere in the list
-            else
-            {
-                Node currentNode = head.nextNode;
-                Node previousNode = head;
-                while (currentNode != null)
-                {
-                    if (currentNode.Value == value)
-                    {
-                        node.nextNode = currentNode;
-                        previousNode.nextNode = node;
-                    }
-                }
+                return;
             }
 
-            _nodesCounter++;
+            Node node = new Node(newValue);
+
+            Node currentNode = head.nextNode;
+            Node previousNode = head;
+            while (currentNode != null)
+            {
+                if (currentNode.Value == value)
+                {
+                    node.nextNode = currentNode;
+                    previousNode.nextNode = node;
+                    _nodesCounter++;
+                    return;
+                }
+                previousNode = currentNode;
+                currentNode = currentNode.nextNode;
+            }
         }
 
-        public bool AddAfter(int afterValue, int value)
+        public void AddAfter(int newValue, int value)
         {
-            if (_nodesCounter == 0)
+            if (head is null)
             {
-                AddFirst(value);
-                return true;
+                return;
             }
-            else
+
+            Node node = new Node(value);
+
+            Node currentNode = head;
+            while (currentNode != null)
             {
-                Node node = new Node(value);
-                Node currentNode = new Node();
-                currentNode = head;
-
-                while (currentNode != null)
+                if (currentNode.Value == value)
                 {
-                    if (currentNode.Value == afterValue)
-                    {
-                        node.nextNode = currentNode.nextNode;
-                        currentNode.nextNode = node;
-                        _nodesCounter++;
+                    node.nextNode = currentNode.nextNode;
+                    currentNode.nextNode = node;
+                    _nodesCounter++;
 
-                        if (currentNode.Value == tail.Value)
-                        {
-                            tail = node;
-                        }
-                        return true;
+                    if (currentNode.Value == tail.Value)
+                    {
+                        tail = node;
                     }
-                    currentNode = currentNode.nextNode;
                 }
-                return false;
+                currentNode = currentNode.nextNode;
             }
         }
         #endregion
@@ -274,12 +261,6 @@ namespace LinkedList
         /// </summary>
         public void PrintList()
         {
-            if (_nodesCounter == 0)
-            {
-                Console.WriteLine($"The linked list is empty");
-                return;
-            }
-
             Node currentNode = head;
             while (currentNode != null)
             {
