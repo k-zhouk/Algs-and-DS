@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList", "LinkedList\LinkedList.csproj", "{1EDDBED4-8C4B-4EE0-AF7D-9CF510A71DE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLinkedList", "LinkedList\SimpleLinkedList.csproj", "{1EDDBED4-8C4B-4EE0-AF7D-9CF510A71DE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoublyLinkedList", "DoublyLinkedList\DoublyLinkedList.csproj", "{5D8DC3FF-0C6F-4A72-BFBA-737E8FD460F7}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabin-Karp Search- TO DO", "Rabin-Karp Search\Rabin-Karp Search- TO DO.csproj", "{3FFB9016-6185-4EC6-925B-E41AD41126DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMP Search- TO DO", "KMP Search\KMP Search- TO DO.csproj", "{7CC9F7FE-9F7C-4195-8285-4C40CFE5B7D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleLinkedListXUnitTest", "LinkedListTest\SimpleLinkedListXUnitTest.csproj", "{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,14 @@ Global
 		{7CC9F7FE-9F7C-4195-8285-4C40CFE5B7D7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7CC9F7FE-9F7C-4195-8285-4C40CFE5B7D7}.Release|x64.ActiveCfg = Release|Any CPU
 		{7CC9F7FE-9F7C-4195-8285-4C40CFE5B7D7}.Release|x64.Build.0 = Release|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Debug|x64.Build.0 = Debug|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Release|x64.ActiveCfg = Release|Any CPU
+		{BFFDADF8-DDF9-41F7-8FB8-F0747F802A88}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

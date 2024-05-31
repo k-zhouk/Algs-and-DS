@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace LinkedList
+namespace SimpleLinkedList
 {
-    class LinkedListTesting
+    class SimpleLinkedListTesting
     {
         static void Main(string[] args)
         {
@@ -12,7 +12,7 @@ namespace LinkedList
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"********** Test {testsCounter}- Create an empty list **********");
             Console.ForegroundColor = origTextColor;
-            LinkedList ll = new LinkedList();
+            SimpleLinkedList ll = new SimpleLinkedList();
             Console.WriteLine($"Total elements count: {ll.Count}");
             Console.WriteLine($"Done{Environment.NewLine}");
             testsCounter++;
@@ -69,8 +69,10 @@ namespace LinkedList
             Console.WriteLine($"********** Test {testsCounter} - Testing \"AddBefore()\" method by adding a value in an empty list **********");
             Console.ForegroundColor = origTextColor;
             {
-                LinkedList abList = new LinkedList();
+                SimpleLinkedList abList = new SimpleLinkedList();
+                
                 abList.AddBefore(100500, 10);
+     
                 Console.WriteLine($"Linked list values are:");
                 abList.PrintList();
                 Console.Write($". Total elements count: {abList.Count}{Environment.NewLine}");
@@ -130,26 +132,12 @@ namespace LinkedList
             testsCounter++;
             #endregion
 
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" method by adding a value in an empty list **********");
-            Console.ForegroundColor = origTextColor;
-            {
-                LinkedList aaList = new LinkedList();
-                aaList.AddAfter(100500, 10);
-                Console.WriteLine($"Linked list values are:");
-                aaList.PrintList();
-                Console.Write($". Total elements count: {aaList.Count}{Environment.NewLine}");
-            }
-            Console.WriteLine($"Done{Environment.NewLine}");
-            testsCounter++;
-
-
             #region *************** Testing AddAfter() method ***************
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" method by adding a value in an empty list **********");
             Console.ForegroundColor = origTextColor;
             {
-                LinkedList aaList = new LinkedList();
+                SimpleLinkedList aaList = new SimpleLinkedList();
                 aaList.AddAfter(100500, 10);
                 Console.WriteLine($"Linked list values are:");
                 aaList.PrintList();
@@ -158,12 +146,45 @@ namespace LinkedList
             Console.WriteLine($"Done{Environment.NewLine}");
             testsCounter++;
 
-            /***********************************************************************************************************************************************/
+            // Emptying the current list and re-populating it again
+            ll.Clear();
+            for (int i = 1; i <= 19; i++)
+            {
+                if ((i % 2) != 0)
+                {
+                    ll.AddFirst(i);
+                }
+            }
+            for (int i = 1; i <= 20; i++)
+            {
+                if ((i % 2) == 0)
+                {
+                    ll.AddLast(i);
+                }
+            }
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" method by adding a value after the Head **********");
+            Console.ForegroundColor = origTextColor;
+            {
+                Console.WriteLine($"Original list:");
+                ll.PrintList();
+                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
+
+                ll.AddAfter(100500, 19);
+                
+                Console.WriteLine($"{Environment.NewLine}Linked list values are:");
+                ll.PrintList();
+                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
+            }
+            Console.WriteLine($"Done{Environment.NewLine}");
+            testsCounter++;
+
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" method by adding a value somewhere into the list **********");
             Console.ForegroundColor = origTextColor;
             {
-                Console.WriteLine($"The list before calling the \"AddAfter()\": ");
+                Console.WriteLine($"Original list:");
                 ll.PrintList();
                 Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
 
@@ -177,18 +198,20 @@ namespace LinkedList
             testsCounter++;
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" method by adding a value before the tail **********");
+            Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" method by adding a value after the tail **********");
             Console.ForegroundColor = origTextColor;
             {
-                Console.WriteLine($"The list before calling the \"AddBefore()\": ");
+                Console.WriteLine($"Original list:");
                 ll.PrintList();
                 Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
 
-                ll.AddBefore(200500, 20);
+                ll.AddAfter(200500, 20);
 
                 Console.WriteLine($"Linked list values are:");
                 ll.PrintList();
                 Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
+
+                Console.WriteLine($"Tail node value: {ll.TailValue}");
             }
             Console.WriteLine($"Done{Environment.NewLine}");
             testsCounter++;
@@ -197,11 +220,11 @@ namespace LinkedList
             Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" before a non-existing value **********");
             Console.ForegroundColor = origTextColor;
             {
-                Console.WriteLine($"The list before calling the \"AddBefore()\": ");
+                Console.WriteLine($"Original list:");
                 ll.PrintList();
                 Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
 
-                ll.AddBefore(300500, 21);
+                ll.AddAfter(300500, 21);
 
                 Console.WriteLine($"Linked list values are:");
                 ll.PrintList();
@@ -211,14 +234,77 @@ namespace LinkedList
             testsCounter++;
             #endregion
 
-            /***********************************************************************************************************************************************/
-            //Console.ForegroundColor = ConsoleColor.DarkYellow;
-            //Console.WriteLine("\n********** Test 5 **********");
-            //Console.ForegroundColor = origTextColor;
-            //Console.WriteLine("Deleting the first node\n");
+            #region *************** Testing deletion of nodes ***************
 
-            //testLinkedList.DeleteFirstNode();
-            //testLinkedList.PrintList();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"********** Test {testsCounter} - Testing \"DeleteFirstNode()\" on an empty list **********");
+            Console.ForegroundColor = origTextColor;
+            {
+                SimpleLinkedList emptyList= new SimpleLinkedList();
+
+                emptyList.DeleteFirstNode();
+
+                Console.WriteLine($"Linked list values are:");
+                emptyList.PrintList();
+                Console.Write($". Total elements count: {emptyList.Count}{Environment.NewLine}");
+            }
+            Console.WriteLine($"Done{Environment.NewLine}");
+            testsCounter++;
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"********** Test {testsCounter} - Testing \"DeleteFirstNode()\" on a list **********");
+            Console.ForegroundColor = origTextColor;
+            {
+                Console.WriteLine($"Original list:");
+                ll.PrintList();
+                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
+
+                ll.DeleteFirstNode();
+
+                Console.WriteLine($"Linked list values are:");
+                ll.PrintList();
+                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
+            }
+            Console.WriteLine($"Done{Environment.NewLine}");
+            testsCounter++;
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"********** Test {testsCounter} - Testing \"DeleteFirstNode()\" on a list with 1 node **********");
+            Console.ForegroundColor = origTextColor;
+            {
+                SimpleLinkedList oneNodeLinkedList= new SimpleLinkedList();
+                oneNodeLinkedList.AddLast(100500);
+
+                Console.WriteLine($"Original list:");
+                oneNodeLinkedList.PrintList();
+                Console.Write($". Total elements count: {oneNodeLinkedList.Count}{Environment.NewLine}");
+
+                oneNodeLinkedList.DeleteFirstNode();
+
+                Console.WriteLine($"Linked list values are:");
+                oneNodeLinkedList.PrintList();
+                Console.Write($". Total elements count: {oneNodeLinkedList.Count}{Environment.NewLine}");
+            }
+            Console.WriteLine($"Done{Environment.NewLine}");
+            testsCounter++;
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine($"********** Test {testsCounter} - Testing \"DeleteLastNode()\" on an empty list **********");
+            Console.ForegroundColor = origTextColor;
+            {
+                SimpleLinkedList emptyList = new SimpleLinkedList();
+
+                emptyList.DeleteLastNode();
+
+                Console.WriteLine($"Linked list values are:");
+                emptyList.PrintList();
+                Console.Write($". Total elements count: {emptyList.Count}{Environment.NewLine}");
+            }
+            Console.WriteLine($"Done{Environment.NewLine}");
+            testsCounter++;
+            #endregion
+
+            /***********************************************************************************************************************************************/
 
             //Console.ForegroundColor = ConsoleColor.DarkYellow;
             //Console.WriteLine("\n********** Test 6 **********");

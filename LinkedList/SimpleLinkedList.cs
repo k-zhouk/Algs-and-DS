@@ -1,21 +1,21 @@
 ﻿using System;
 
-namespace LinkedList
+namespace SimpleLinkedList
 {
     /// <summary>
     /// This class implements a singly linked list
     /// </summary>
-    class LinkedList
+    class SimpleLinkedList
     {
         private Node head, tail;
 
         #region ********** Constructors **********
-        public LinkedList()
+        public SimpleLinkedList()
         {
             head = tail = null;
         }
 
-        public LinkedList(int value)
+        public SimpleLinkedList(int value)
         {
             Node node = new Node(value);
             _nodesCounter = 1;
@@ -86,7 +86,7 @@ namespace LinkedList
                 return;
             }
 
-            Node node = new Node(value);
+            Node node = new Node(newValue);
 
             Node currentNode = head;
             while (currentNode != null)
@@ -95,12 +95,14 @@ namespace LinkedList
                 {
                     node.nextNode = currentNode.nextNode;
                     currentNode.nextNode = node;
-                    _nodesCounter++;
-
-                    if (currentNode.Value == tail.Value)
+                    
+                    if (currentNode == tail)
                     {
                         tail = node;
                     }
+
+                    _nodesCounter++;
+                    return;
                 }
                 currentNode = currentNode.nextNode;
             }
@@ -110,19 +112,21 @@ namespace LinkedList
         #region ********** Deleting elements **********
         public void DeleteFirstNode()
         {
-            if (head != null)
+            if (head is null)
             {
-                head = head.nextNode;
-                _nodesCounter--;
+                return;
             }
             else
             {
-                Console.WriteLine("The linked list is empty. Nothing to delete");
+                head=head.nextNode;
+                _nodesCounter--;
             }
         }
 
         public void DeleteLastNode()
         {
+
+
             if (tail != null)
             {
                 Node currentNode = new Node();
@@ -248,7 +252,7 @@ namespace LinkedList
         /// <summary>
         /// The method clears the list
         /// </summary>
-        public void ClearList()
+        public void Clear()
         {
             head = tail = null;
             _nodesCounter = 0;
