@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SimpleLinkedList
+namespace LinkedList
 {
     /// <summary>
     /// This class implements a singly linked list
     /// </summary>
-    class SimpleLinkedList
+    public class SimpleLinkedList
     {
         private Node head, tail;
 
