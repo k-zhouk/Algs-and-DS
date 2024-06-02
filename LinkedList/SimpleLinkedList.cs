@@ -56,13 +56,24 @@ namespace LinkedList
 
         public void AddBefore(int newValue, int value)
         {
+            // Do not anything to an empty list
             if (head is null)
             {
                 return;
             }
 
             Node node = new Node(newValue);
+            
+            // Case when there is only one node
+            if (head.nextNode is null)
+            {
+                node.nextNode = tail;
+                head= node;
+                _nodesCounter++;
+                return;
+            }
 
+            // All other cases
             Node currentNode = head.nextNode;
             Node previousNode = head;
             while (currentNode != null)
@@ -268,7 +279,14 @@ namespace LinkedList
             Node currentNode = head;
             while (currentNode != null)
             {
-                Console.Write(" " + currentNode.Value);
+                if(currentNode.nextNode is null)
+                {
+                    Console.Write(currentNode.Value);
+                }
+                else
+                {
+                    Console.Write(currentNode.Value + " ");
+                }
                 currentNode = currentNode.nextNode;
             }
         }

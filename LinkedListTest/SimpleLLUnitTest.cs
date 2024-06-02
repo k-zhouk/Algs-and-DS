@@ -142,6 +142,7 @@ namespace LinkedListTest
             Assert.Equal((uint)5, nodesCount);
         }
 
+        #region *************** Testing AddBefore() method
         [Fact]
         public void AddBeforeValueToEmptyList()
         {
@@ -153,6 +154,7 @@ namespace LinkedListTest
             testList.AddBefore(100500, 10);
 
             // Assert
+            // The new node should not be added
             int? headValue = testList.HeadValue;
             int? tailValue = testList.TailValue;
             uint nodesCount = testList.Count;
@@ -163,10 +165,33 @@ namespace LinkedListTest
         }
         
         [Fact]
-        public void AddBeforeValueInMiddleOfListTest()
+        public void AddBeforeBeforeHead()
+        {
+            // Testing the "AddBefore()" method by adding a value before the head
+            // Arrange
+            StringWriter sw= new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList();
+            testList.AddFirst(1);
+
+            // Act
+            testList.AddBefore(100500, 1);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal("100500 1", sw.ToString());
+            Assert.Equal((uint)2, testList.Count);
+        }
+
+        [Fact]
+        public void AddBeforeInMiddleOfListTest()
         {
             // Testing the "AddBefore()" method by adding a value in the middle of a list
             // Arrange
+            StringWriter sw= new StringWriter();
+            Console.SetOut(sw);
+
             SimpleLinkedList testList = new SimpleLinkedList();
 
             // Creating a list with 5 even numbers
@@ -180,23 +205,65 @@ namespace LinkedListTest
 
             // Act
             testList.AddBefore(100500, 6);
+            testList.PrintList();
 
-            // Assert
+            // Asserts
+            Assert.Equal("10 8 100500 6 4 2", sw.ToString());
+
             int? headValue = testList.HeadValue;
-            int? tailValue = testList.TailValue;
-            uint nodesCount = testList.Count;
-
-            // Need another way of testing. Need to check the position in the list
             Assert.Equal(10, headValue);
+            
+            int? tailValue = testList.TailValue;
             Assert.Equal(2, tailValue);
+
+            uint nodesCount = testList.Count;
+            Assert.Equal((uint)6, nodesCount);
+        }
+
+        [Fact]
+        public void AddBeforeBeforeTailTest()
+        {
+            // Testing the "AddBefore()" method by adding a value before the tail
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            // Creating a list with 5 even numbers
+            for (int i = 1; i <= 10; i++)
+            {
+                if ((i % 2) == 0)
+                {
+                    testList.AddFirst(i);
+                }
+            }
+
+            // Act
+            testList.AddBefore(100500, 2);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal("10 8 6 4 100500 2", sw.ToString());
+
+            int? headValue = testList.HeadValue;
+            Assert.Equal(10, headValue);
+
+            int? tailValue = testList.TailValue;
+            Assert.Equal(2, tailValue);
+
+            uint nodesCount = testList.Count;
             Assert.Equal((uint)6, nodesCount);
         }
         
         [Fact]
-        public void AddBeforeValueBeforeTailTest()
+        public void AddBeforeNonExistingValueTest()
         {
-            // Testing the "AddBefore()" method by adding a value before the tail
+            // Testing the "AddBefore()" method by adding a before a non-existing value
             // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
             SimpleLinkedList testList = new SimpleLinkedList();
 
             // Creating a list with 5 even numbers
@@ -209,17 +276,45 @@ namespace LinkedListTest
             }
 
             // Act
-            testList.AddBefore(100500, 6);
+            testList.AddBefore(100500, 1);
+            testList.PrintList();
 
-            // Assert
+            // Asserts
+            Assert.Equal("10 8 6 4 2", sw.ToString());
+
             int? headValue = testList.HeadValue;
-            int? tailValue = testList.TailValue;
-            uint nodesCount = testList.Count;
-
             Assert.Equal(10, headValue);
-            Assert.Equal(2, tailValue);
-            Assert.Equal((uint)6, nodesCount);
-        }
 
+            int? tailValue = testList.TailValue;
+            Assert.Equal(2, tailValue);
+
+            uint nodesCount = testList.Count;
+            Assert.Equal((uint)5, nodesCount);
+        }
+        #endregion
+
+        #region *************** Testing AddAfter() method
+        [Fact]
+        public void AddAfterValueToEmptyList()
+        {
+            // Testing the "AddAfter()" method by adding a value in an empty list
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            // Act
+            testList.AddAfter(100500, 10);
+
+            // Asserts
+            // The new node should not be added
+            int? headValue = testList.HeadValue;
+            Assert.Null(headValue);
+
+            int? tailValue = testList.TailValue;
+            Assert.Null(tailValue);
+
+            uint nodesCount = testList.Count;
+            Assert.Equal((uint)0, nodesCount);
+        }
+        #endregion
     }
 }

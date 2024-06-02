@@ -10,44 +10,13 @@ namespace LinkedList
             
             ConsoleColor origTextColor= Console.ForegroundColor;
             SimpleLinkedList ll = new SimpleLinkedList();
-            /* ^^^^^^^^^^^^^^^ keep those ^^^^^^^^^^^^^^^
+            /* ^^^^^^^^^^^^^^^ keep those ^^^^^^^^^^^^^^^ */
 
-                                    /* *************** TO DO: move to Unit testing ***************/
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"********** Test {testsCounter} - Testing \"AddBefore()\" method by adding a value before the tail **********");
-            Console.ForegroundColor = origTextColor;
-            {
-                Console.WriteLine($"The list before calling the \"AddBefore()\": ");
-                ll.PrintList();
-                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
 
-                ll.AddBefore(200500, 20);
-
-                Console.WriteLine($"Linked list values are:");
-                ll.PrintList();
-                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
-            }
-            Console.WriteLine($"Done{Environment.NewLine}");
-            testsCounter++;
-
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine($"********** Test {testsCounter} - Testing \"AddBefore()\" before a non-existing value **********");
-            Console.ForegroundColor = origTextColor;
-            {
-                Console.WriteLine($"The list before calling the \"AddBefore()\": ");
-                ll.PrintList();
-                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
-
-                ll.AddBefore(300500, 21);
-
-                Console.WriteLine($"Linked list values are:");
-                ll.PrintList();
-                Console.Write($". Total elements count: {ll.Count}{Environment.NewLine}");
-            }
-            Console.WriteLine($"Done{Environment.NewLine}");
-            testsCounter++;
-
+            
             #region *************** Testing AddAfter() method ***************
+            /* *************** TO DO: move to Unit testing ***************/
+            
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"********** Test {testsCounter} - Testing \"AddAfter()\" method by adding a value in an empty list **********");
             Console.ForegroundColor = origTextColor;
