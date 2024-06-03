@@ -45,8 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SimpleLinkedList.cs" />
-    <Compile Include="SimpleLinkedListTesting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleLinkedListTesting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
