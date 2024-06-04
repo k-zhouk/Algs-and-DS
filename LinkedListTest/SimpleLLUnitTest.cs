@@ -779,12 +779,333 @@ namespace LinkedListTest
         #endregion
 
         #region *************** Testing of DeleteAfter() methods ***************
+        [Fact]
+        public void DeleteAfterForEmptyListTest()
+        {
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            // Act
+            bool res = testList.DeleteAfter(5);
+
+            // Asserts
+            Assert.False(res);
+        }
+
+        [Fact]
+        public void DeleteAfterForOneNodeListTest()
+        {
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            // Act
+            testList.DeleteAfter(1);
+
+            // Asserts
+            Assert.NotNull(testList);
+            Assert.Equal(1, testList.HeadValue);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)1, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAfterHeadTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.DeleteAfter(5);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal("5 4 3 2 1", sw.ToString());
+            Assert.Equal((uint)5, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAfterTailTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.DeleteAfter(1);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal(5, testList.HeadValue);
+            Assert.Equal(2, testList.TailValue);
+            Assert.Equal((uint)5, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAfterForNonExistingNodeTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.DeleteAfter(0);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal(5, testList.HeadValue);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)5, testList.Count);
+        }
         #endregion
 
-        #region *************** Testing of DeleteFirstOccurrence() methods ***************
+        #region *************** Testing of Delete() methods ***************
+        [Fact]
+        public void DeleteForEmptyListTest()
+        {
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            // Act
+            bool res = testList.Delete(0);
+
+            // Asserts
+            Assert.False(res);
+        }
+
+        [Fact]
+        public void DeleteForOneNodeListTest()
+        {
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            // Act
+            testList.Delete(1);
+
+            // Asserts
+            Assert.NotNull(testList);
+            Assert.Equal(1, testList.HeadValue);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)1, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteHeadTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.Delete(5);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal("4 3 2 1", sw.ToString());
+            Assert.Equal((uint)4, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteTailTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.Delete(1);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal(5, testList.HeadValue);
+            Assert.Equal(2, testList.TailValue);
+            Assert.Equal((uint)4, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteForNonExistingNodeTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.Delete(0);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal(5, testList.HeadValue);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)5, testList.Count);
+        }
         #endregion
 
         #region *************** Testing of DeleteAllOccurrences() methods ***************
+        [Fact]
+        public void DeleteAllOccurrencesForEmptyListTest()
+        {
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            // Act
+            testList.DeleteAllOccurrences(0);
+
+            // Asserts
+            Assert.NotNull(testList);
+            Assert.Equal((uint)0, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAllOccurrencesForOneNodeListTest()
+        {
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            // Act
+            testList.DeleteAllOccurrences(1);
+
+            // Asserts
+            Assert.NotNull(testList);
+            Assert.Equal(1, testList.HeadValue);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)1, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAllOccurrencesHeadTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.DeleteAllOccurrences(5);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal("4 3 2 1", sw.ToString());
+            Assert.Equal((uint)4, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAllOccurrencesTailTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList(1);
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.DeleteAllOccurrences(1);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal(5, testList.HeadValue);
+            Assert.Equal(2, testList.TailValue);
+            Assert.Equal((uint)4, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAllOccurrencesForNonExistingNodeTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+
+            // Act
+            testList.DeleteAllOccurrences(0);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal(5, testList.HeadValue);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)5, testList.Count);
+        }
+        
+        [Fact]
+        public void DeleteAllOccurrencesForAllSameNodesTest()
+        {
+            // Arrange
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            int testValue = 10;
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(testValue);
+            }
+
+            // Act
+            testList.DeleteAllOccurrences(testValue);
+            testList.PrintList();
+
+            // Asserts
+            Assert.NotNull(testList);
+            Assert.Null(testList.HeadValue);
+            Assert.Null(testList.TailValue);
+            Assert.Equal((uint)0, testList.Count);
+        }
         #endregion
     }
 }

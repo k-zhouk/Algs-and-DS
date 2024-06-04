@@ -83,7 +83,7 @@ namespace LinkedList
             // All other cases
             Node currentNode = head.nextNode;
             Node previousNode = head;
-            while (currentNode != null)
+            while (!(currentNode is null))
             {
                 if (currentNode.Value == value)
                 {
@@ -107,7 +107,7 @@ namespace LinkedList
             Node node = new Node(newValue);
 
             Node currentNode = head;
-            while (currentNode != null)
+            while (!(currentNode is null))
             {
                 if (currentNode.Value == value)
                 {
@@ -157,14 +157,14 @@ namespace LinkedList
             }
 
             // One node list
-            if(head.nextNode is null)
+            if (head.nextNode is null)
             {
-                head= tail = null;
-                _nodesCounter-- ;
+                head = tail = null;
+                _nodesCounter--;
                 return;
             }
 
-            if (tail != null)
+            if (!(tail is null))
             {
                 Node currentNode = head;
                 while (currentNode.nextNode != tail)
@@ -206,7 +206,7 @@ namespace LinkedList
                 Node prevNode = head;
                 Node currentNode = head.nextNode;
 
-                while (currentNode != null)
+                while (!(currentNode is null))
                 {
                     if (currentNode.Value == node.Value)
                     {
@@ -225,28 +225,29 @@ namespace LinkedList
             }
             return false;
         }
+
         public bool DeleteAfter(int value)
         {
-            Node node = new Node(value);
-            if (_nodesCounter == 0)
+            // Nothing to delete for an empty list or list with just one node
+            if ((head is null) || (head.nextNode is null))
             {
-                Console.WriteLine("The list is empty. Nothing to delete");
                 return false;
             }
+
             // Check if our node is the last one
-            else if (tail.Value == node.Value)
+            Node node = new Node(value);
+            if (tail.Value == node.Value)
             {
-                Console.WriteLine("This is the last node. Node possible to delete.");
                 return false;
             }
             else
             {
                 Node currentNode = head;
-                while (currentNode != null)
+                while (!(currentNode is null))
                 {
                     if (currentNode.Value == node.Value)
                     {
-                        if (currentNode.nextNode.nextNode == null)
+                        if (currentNode.nextNode.nextNode is null)
                         {
                             DeleteLastNode();
                             _nodesCounter--;
@@ -265,14 +266,57 @@ namespace LinkedList
             return false;
         }
 
-        public void Delete()
+        public bool Delete(int value)
         {
-            throw new NotImplementedException("The DeleteFirstOccurrence() method is not implemented yet");
+            // Nothing to delete for an empty list
+            if (head is null)
+            {
+                return false;
+            }
+
+            // Deleting a node in the one node list
+            if ((head.nextNode is null) && (head.Value == value))
+            {
+                head = tail = null;
+                _nodesCounter = 0;
+                return true;
+            }
+
+            Node currentNode = head.nextNode;
+            while (!(currentNode is null))
+            {
+                if ()
+                {
+
+                }
+                currentNode = currentNode.nextNode;
+            }
+            return false;
         }
 
-        public void DeleteAllOccurrences()
+        public void DeleteAllOccurrences(int value)
         {
-            throw new NotImplementedException("The DeleteAllOccurrences() method is not implemented yet");
+            // Nothing to delete for an empty list
+            if (head is null)
+            {
+                return;
+            }
+
+            // Deletion for a one node list
+            if ((head.nextNode is null) && (head.Value == value))
+            {
+                head = tail = null;
+                _nodesCounter = 0;
+                return;
+            }
+
+            Node currentNode = head.nextNode;
+            Node previousNode = head;
+
+            while (!(currentNode is null))
+            {
+
+            }
         }
 
         /// <summary>
@@ -292,7 +336,7 @@ namespace LinkedList
         public void PrintList()
         {
             Node currentNode = head;
-            while (currentNode != null)
+            while (!(currentNode is null))
             {
                 if (currentNode.nextNode is null)
                 {
@@ -314,7 +358,7 @@ namespace LinkedList
         public bool Contains(int value)
         {
             Node currentNode = head;
-            while (currentNode != null)
+            while (!(currentNode is null))
             {
                 if (currentNode.Value == value)
                 {
