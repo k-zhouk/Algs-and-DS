@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="SimpleLinkedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleLinkedListTesting.cs" />
+    <Compile Include="SimpleLinkedListMain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -178,7 +178,7 @@ namespace LinkedList
         }
 
         /// <summary>
-        /// The method returns deletes a node before a specified one and returns true, if
+        /// The method deletes a node before a specified one and returns true, if
         /// the node has been deleted. Otherwise it returns false
         /// </summary>
         /// <param name="refNode"></param>
@@ -274,21 +274,33 @@ namespace LinkedList
                 return false;
             }
 
-            // Deleting a node in the one node list
-            if ((head.nextNode is null) && (head.Value == value))
+            // Checking the head
+            if (head.Value == value)
             {
-                head = tail = null;
-                _nodesCounter = 0;
+                DeleteFirstNode();
                 return true;
             }
 
-            Node currentNode = head.nextNode;
+            // Checking the tail
+            if (tail.Value == value)
+            {
+                DeleteLastNode();
+                return true;
+            }
+
+            Node currentNode = head;
+            Node previousNode = head.nextNode;
+
             while (!(currentNode is null))
             {
-                if ()
+                if (previousNode.Value == value)
                 {
-
+                    previousNode.nextNode = currentNode.nextNode;
+                    _nodesCounter--;
+                    return true;
                 }
+
+                previousNode = currentNode;
                 currentNode = currentNode.nextNode;
             }
             return false;
@@ -313,9 +325,10 @@ namespace LinkedList
             Node currentNode = head.nextNode;
             Node previousNode = head;
 
+            // TO DO: To implement
             while (!(currentNode is null))
             {
-
+                currentNode = currentNode.nextNode;
             }
         }
 

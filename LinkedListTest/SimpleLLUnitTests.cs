@@ -2,7 +2,7 @@ using LinkedList;
 
 namespace LinkedListTest
 {
-    public class SimpleLLUnitTest
+    public class SimpleLLUnitTests
     {
         [Fact]
         public void CreateEmptyListTest()
@@ -713,7 +713,7 @@ namespace LinkedListTest
             StringWriter sw= new StringWriter();
             Console.SetOut(sw);
 
-            SimpleLinkedList testList = new SimpleLinkedList(1);
+            SimpleLinkedList testList = new SimpleLinkedList();
 
             for (int i = 1; i <= 5; i++)
             {
@@ -736,7 +736,7 @@ namespace LinkedListTest
             StringWriter sw= new StringWriter();
             Console.SetOut(sw);
 
-            SimpleLinkedList testList = new SimpleLinkedList(1);
+            SimpleLinkedList testList = new SimpleLinkedList();
 
             for (int i = 1; i <= 5; i++)
             {
@@ -748,9 +748,10 @@ namespace LinkedListTest
             testList.PrintList();
 
             // Asserts
+            Assert.Equal("5 4 3 1", sw.ToString());
             Assert.Equal(5, testList.HeadValue);
-            Assert.Equal(2, testList.TailValue);
-            Assert.Equal((uint)5, testList.Count);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)4, testList.Count);
         }
         
         [Fact]
@@ -815,7 +816,7 @@ namespace LinkedListTest
             StringWriter sw = new StringWriter();
             Console.SetOut(sw);
 
-            SimpleLinkedList testList = new SimpleLinkedList(1);
+            SimpleLinkedList testList = new SimpleLinkedList();
 
             for (int i = 1; i <= 5; i++)
             {
@@ -827,8 +828,8 @@ namespace LinkedListTest
             testList.PrintList();
 
             // Asserts
-            Assert.Equal("5 4 3 2 1", sw.ToString());
-            Assert.Equal((uint)5, testList.Count);
+            Assert.Equal("5 3 2 1", sw.ToString());
+            Assert.Equal((uint)4, testList.Count);
         }
 
         [Fact]
@@ -838,7 +839,7 @@ namespace LinkedListTest
             StringWriter sw = new StringWriter();
             Console.SetOut(sw);
 
-            SimpleLinkedList testList = new SimpleLinkedList(1);
+            SimpleLinkedList testList = new SimpleLinkedList();
 
             for (int i = 1; i <= 5; i++)
             {
@@ -851,7 +852,7 @@ namespace LinkedListTest
 
             // Asserts
             Assert.Equal(5, testList.HeadValue);
-            Assert.Equal(2, testList.TailValue);
+            Assert.Equal(1, testList.TailValue);
             Assert.Equal((uint)5, testList.Count);
         }
 
@@ -905,9 +906,9 @@ namespace LinkedListTest
 
             // Asserts
             Assert.NotNull(testList);
-            Assert.Equal(1, testList.HeadValue);
-            Assert.Equal(1, testList.TailValue);
-            Assert.Equal((uint)1, testList.Count);
+            Assert.Null(testList.HeadValue);
+            Assert.Null(testList.TailValue);
+            Assert.Equal((uint)0, testList.Count);
         }
 
         [Fact]
@@ -917,7 +918,7 @@ namespace LinkedListTest
             StringWriter sw = new StringWriter();
             Console.SetOut(sw);
 
-            SimpleLinkedList testList = new SimpleLinkedList(1);
+            SimpleLinkedList testList = new SimpleLinkedList();
 
             for (int i = 1; i <= 5; i++)
             {
@@ -940,7 +941,7 @@ namespace LinkedListTest
             StringWriter sw = new StringWriter();
             Console.SetOut(sw);
 
-            SimpleLinkedList testList = new SimpleLinkedList(1);
+            SimpleLinkedList testList = new SimpleLinkedList();
 
             for (int i = 1; i <= 5; i++)
             {

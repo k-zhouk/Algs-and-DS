@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace LinkedList
+﻿namespace SortedLinkedList
 {
-    class SimpleLinkedListTesting
+    class SortedLinkedListMain
     {
         static void Main(string[] args)
         {
