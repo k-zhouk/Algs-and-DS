@@ -1,22 +1,22 @@
 ﻿using System;
 
-namespace SortedLinkedList
+namespace SortedLinkedListNameSpace
 {
-    class SortedLinkedList
+    public class SortedLinkedList
     {
-        private Node head, tail;
+        private Node head;
 
         #region *************** Constructors ***************
         public SortedLinkedList()
         {
-            head = tail = null;
+            head = null;
             _nodesCounter = 0;
         }
 
         public SortedLinkedList(int value)
         {
             Node node = new Node(value);
-            head = tail = node;
+            head = node;
 
             _nodesCounter = 1;
         }
@@ -33,17 +33,47 @@ namespace SortedLinkedList
             // Case 1: the list is empty
             if (head is null)
             {
-                head = tail = node;
+                head = node;
                 _nodesCounter = 1;
+                return;
             }
 
-            Node currentNode = head;
-
-            while(currentNode != null)
+            // Case 2: 1 node list
+            if(head.nextNode is null)
             {
-                if(currentNode.Value == value)
+                if (value >= head.Value)
                 {
-                    node.nextNode = currentNode.nextNode;
+                    head.nextNode = node;
+                    _nodesCounter++;
+                    return;
+                }
+                else
+                {
+                    node.nextNode = head;
+                    head = node;
+                    _nodesCounter++;
+                    return;
+                }
+            }
+
+            // Case 3: more than 2 nodes
+            Node currentNode = head.nextNode;
+            Node previousNode = head;
+
+            while (!(currentNode is null))
+            {
+                if (value < currentNode.Value)
+                {
+                    currentNode = currentNode.nextNode;
+                    previousNode = currentNode;
+                }
+                else
+                {
+                    node.nextNode = currentNode;
+                    previousNode.nextNode = node;
+                    previousNode = node;
+                    _nodesCounter++;
+                    return;
                 }
             }
         }
@@ -59,7 +89,7 @@ namespace SortedLinkedList
             // List with one node
             if (head.nextNode is null)
             {
-                head = tail = null;
+                head = null;
             }
             else
             {
@@ -79,22 +109,18 @@ namespace SortedLinkedList
             // One node list
             if (head.nextNode is null)
             {
-                head = tail = null;
+                head = null;
                 _nodesCounter--;
                 return;
             }
 
-            if (!(tail is null))
+            Node currentNode = head;
+            while (!(currentNode.nextNode is null))
             {
-                Node currentNode = head;
-                while (currentNode.nextNode != tail)
-                {
-                    currentNode = currentNode.nextNode;
-                }
-                currentNode.nextNode = null;
-                tail = currentNode;
-                _nodesCounter--;
+                currentNode = currentNode.nextNode;
             }
+            currentNode.nextNode = null;
+            _nodesCounter--;
         }
 
         /// <summary>
@@ -169,15 +195,6 @@ namespace SortedLinkedList
         {
             get => head?.Value;
         }
-
-        /// <summary>
-        /// The read-only property returns the value of the tail node, it could be a number or a null, if the list is empty
-        /// </summary>
-        public int? TailValue
-        {
-            get => tail?.Value;
-        }
-
         #endregion
 
         class Node
