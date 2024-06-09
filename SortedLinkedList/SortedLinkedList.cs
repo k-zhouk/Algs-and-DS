@@ -31,6 +31,7 @@ namespace SortedLinkedListNameSpace
             Node node = new Node(value);
 
             // Case 1: the list is empty
+            // In this case the head points to the newly created node
             if (head is null)
             {
                 head = node;
@@ -38,98 +39,148 @@ namespace SortedLinkedListNameSpace
                 return;
             }
 
-            // Case 2: 1 node list
-            if(head.nextNode is null)
+            // Case 2: non-empty list
+            // The head is pointing to the lowest value always, so if we get a new value that is equal or lower,
+            // we add it to the left and move the head pointer
+            if (value <= head.Value)
             {
-                if (value >= head.Value)
-                {
-                    head.nextNode = node;
-                    _nodesCounter++;
-                    return;
-                }
-                else
-                {
-                    node.nextNode = head;
-                    head = node;
-                    _nodesCounter++;
-                    return;
-                }
-            }
-
-            // Case 3: more than 2 nodes
-            Node currentNode = head.nextNode;
-            Node previousNode = head;
-
-            while (!(currentNode is null))
-            {
-                if (value < currentNode.Value)
-                {
-                    currentNode = currentNode.nextNode;
-                    previousNode = currentNode;
-                }
-                else
-                {
-                    node.nextNode = currentNode;
-                    previousNode.nextNode = node;
-                    previousNode = node;
-                    _nodesCounter++;
-                    return;
-                }
-            }
-        }
-
-        public void DeleteFirstNode()
-        {
-            // Empty list
-            if (head is null)
-            {
+                node.nextNode = head;
+                head = node;
+                _nodesCounter++;
                 return;
             }
 
-            // List with one node
+            Node currentNode = head;
+            Node previousNode = null;
+
+            while (!(currentNode is null))
+            {
+                // Case A: we reached the final node, so we add a new node to the end of the list
+                if ((value > currentNode.Value) && (currentNode.nextNode is null))
+                {
+                    currentNode.nextNode = node;
+                    _nodesCounter++;
+                    return;
+                }
+
+                // Case B: we are somewhere in the list and the new node is less than or equal the current node
+                if (value <= currentNode.Value)
+                {
+                    node.nextNode = currentNode;
+                    previousNode.nextNode = node;
+                    _nodesCounter++;
+                    return;
+                }
+
+                previousNode = currentNode;
+                currentNode = currentNode.nextNode;
+            }
+        }
+
+        public bool DeleteFirstNode()
+        {
+            // Case 1: Empty list
+            if (head is null)
+            {
+                return false;
+            }
+
+            // Case 2: List with one node
             if (head.nextNode is null)
             {
                 head = null;
             }
+            // Case 3: List with several nodes
             else
             {
                 head = head.nextNode;
             }
             _nodesCounter--;
+            return true;
         }
 
-        public void DeleteLastNode()
+        public bool DeleteLastNode()
         {
-            // Nothing to delete, if the list is empty
+            // Case 1: Nothing to delete, if the list is empty
             if (head is null)
             {
-                return;
+                return false;
             }
 
-            // One node list
+            // Case 2: One node list
             if (head.nextNode is null)
             {
                 head = null;
                 _nodesCounter--;
-                return;
+                return true;
             }
 
+            // Case 3: list with several nodes
             Node currentNode = head;
-            while (!(currentNode.nextNode is null))
+            Node previousNode = null;
+
+            while (!(currentNode is null))
             {
+                if (currentNode.nextNode is null)
+                {
+                    previousNode.nextNode = null;
+                    _nodesCounter--;
+                    return true;
+                }
+                previousNode = currentNode;
                 currentNode = currentNode.nextNode;
             }
-            currentNode.nextNode = null;
-            _nodesCounter--;
+
+            return false;
         }
 
         /// <summary>
-        /// The method removes a node from the sorted list
+        /// The method deletes a node from the sorted list
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         public bool DeleteNode(int value)
         {
+            // Case 1: empty list
+            if (head is null)
+            {
+                return false;
+            }
+
+            // Case 2: Delete the head of a one node list
+            if (head.nextNode is null)
+            {
+                if (value == head.Value)
+                {
+                    head = null;
+                    _nodesCounter--;
+                    return true;
+                }
+            }
+
+            // Case 3: Deletion from a non-empty list
+            // Start from the 2nd node
+            Node currentNode = head;
+            Node previousNode = null;
+
+            while (!(currentNode is null))
+            {
+                if ((value == currentNode.Value) && (previousNode is null))
+                {
+                    head = head.nextNode;
+                    _nodesCounter--;
+                    return true;
+                }
+
+                if ((value== currentNode.Value) && !(previousNode is null))
+                {
+                    previousNode.nextNode = currentNode.nextNode;
+                    _nodesCounter--;
+                    return true;
+                }
+                previousNode = currentNode;
+                currentNode = currentNode.nextNode;
+            }
             return false;
         }
 
