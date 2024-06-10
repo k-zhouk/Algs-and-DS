@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace BST_Tree
 {
-    class Program
+    class BSTTreeMain
     {
         static void Main(string[] args)
         {

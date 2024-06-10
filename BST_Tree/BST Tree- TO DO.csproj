@@ -63,8 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BST_TreeLib.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="BSTTree.cs" />
+    <Compile Include="BSTTreeMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
