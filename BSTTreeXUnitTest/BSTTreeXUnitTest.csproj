@@ -21,4 +21,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BST_Tree\BST Tree.csproj" />
+  </ItemGroup>
+
 </Project>

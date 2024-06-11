@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoublyLinkedList", "DoublyL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortedLinkedList", "SortedLinkedList\SortedLinkedList.csproj", "{5B05B6CD-A620-4DC9-9873-2DAC999DFD87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BST Tree- TO DO", "BST_Tree\BST Tree- TO DO.csproj", "{3CBAC045-4263-4577-B6A2-8B8802ACC09E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BST Tree", "BST_Tree\BST Tree.csproj", "{3CBAC045-4263-4577-B6A2-8B8802ACC09E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabin-Karp Search- TO DO", "Rabin-Karp Search\Rabin-Karp Search- TO DO.csproj", "{3FFB9016-6185-4EC6-925B-E41AD41126DB}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleLinkedListXUnitTest",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SortedLinkedListXUnitTest", "SortedLinkedListXUnitTest\SortedLinkedListXUnitTest.csproj", "{6EC8F971-4971-4CF1-9F6E-0CAC9311C10B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSTTreeXUnitTest", "BSTTreeXUnitTest\BSTTreeXUnitTest.csproj", "{17E6C2AF-561E-41A8-B213-659CC3388D38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BSTTreeXUnitTest", "BSTTreeXUnitTest\BSTTreeXUnitTest.csproj", "{17E6C2AF-561E-41A8-B213-659CC3388D38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

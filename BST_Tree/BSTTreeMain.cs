@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace BST_Tree
 {
@@ -7,7 +6,7 @@ namespace BST_Tree
     {
         static void Main(string[] args)
         {
-            BST_Tree testTree = new BST_Tree();
+            BSTTree testTree = new BSTTree();
             testTree.Add(50);
             testTree.Add(10);
             testTree.Add(60);
@@ -25,22 +24,20 @@ namespace BST_Tree
             testTree.Add(11);
 
             // Testing deletion of a leaf node (node with no children)
-            testTree.DeleteNode(20);
-
+            testTree.Delete(20);
             
             int testValue = 55;
             Debug.Write($"Test value 1 to find: {testValue}. ");
-            Debug.WriteLine($"Test value is in the tree: {testTree.CheckPresense(testValue)}");
+            Debug.WriteLine($"Test value is in the tree: {testTree.Contains(testValue)}");
 
-            
             testValue = 100500;
             Debug.Write($"Test value 1 to find: {testValue}. ");
-            Debug.WriteLine($"Test value is in the tree: {testTree.CheckPresense(testValue)}");
+            Debug.WriteLine($"Test value is in the tree: {testTree.Contains(testValue)}");
 
-            Debug.WriteLine($"Deleting a node with the value of {testValue}: {testTree.DeleteSubtree(testValue)}");
+            Debug.WriteLine($"Deleting a node with the value of {testValue}: {testTree.Delete(testValue)}");
 
             testValue = 20;
-            Debug.WriteLine($"Deleting a node with the value of {testValue}: {testTree.DeleteSubtree(testValue)}");
+            Debug.WriteLine($"Deleting a node with the value of {testValue}: {testTree.Delete(testValue)}");
 
             Debug.WriteLine($"Calling the Clear method");
             testTree.Clear();
