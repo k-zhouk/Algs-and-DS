@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 namespace BST_Tree
 {
@@ -20,7 +19,7 @@ namespace BST_Tree
         }
         #endregion
 
-        #region *************** Main BST methods ***************
+        #region *************** Main methods ***************
         /// <summary>
         /// The method adds a new node to the tree
         /// </summary>
@@ -89,6 +88,8 @@ namespace BST_Tree
 
             while(!(currentNode is null))
             {
+
+
                 // Case 3: deleting a node with no children
                 if((currentNode.LeftNode is null) && (currentNode.RightNode is null))
                 {
@@ -135,8 +136,6 @@ namespace BST_Tree
         {
             root = null;
         }
-
-
         #endregion
 
         #region *************** Other methods ***************
