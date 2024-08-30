@@ -66,8 +66,7 @@ namespace BST_Tree
         /// The method deletes a node. Returns true if a node has been deleted
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <returns>Returns true if a node was deleted</returns>
         public bool Delete(int value)
         {
             // Case 1: the tree is empty
@@ -86,12 +85,10 @@ namespace BST_Tree
             BSTNode topNode = null;
             BSTNode currentNode = root;
 
-            while(!(currentNode is null))
+            while (!(currentNode is null))
             {
-
-
                 // Case 3: deleting a node with no children
-                if((currentNode.LeftNode is null) && (currentNode.RightNode is null))
+                if ((currentNode.LeftNode is null) && (currentNode.RightNode is null))
                 {
 
                 }
@@ -103,10 +100,10 @@ namespace BST_Tree
         }
 
         /// <summary>
-        /// The mthod returns true if the node is in the tree and false otherwise
+        /// The method returns true if the node is in the tree and false otherwise
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns>Returns true, if a value is in the tree</returns>
         public bool Contains(int value)
         {
             // Start search from the root node
@@ -130,6 +127,39 @@ namespace BST_Tree
         }
 
         /// <summary>
+        /// Method finds a node with the minimum value
+        /// </summary>
+        /// <returns>Minmum value as an integer</returns>
+        public int GetMinimum()
+        {
+            BSTNode currentNode = root;
+
+            // Case 1: The tree is empty
+            if (root is null)
+            {
+                throw new InvalidOperationException("The tree is empty and doesn't contain any nodes");
+            }
+            
+            // Case 2: The tree has only a root node
+            if ((root.LeftNode is null) && (root.RightNode is null))
+            {
+                return root.Value;
+            }
+
+            // Case 3: The tree has more than 1 node
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Method returns a node with the maximum value
+        /// </summary>
+        /// <returns>Maximum value as an integer</returns>
+        public int GetMaximum()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// The method clears the tree
         /// </summary>
         public void Clear()
@@ -144,9 +174,30 @@ namespace BST_Tree
         /// </summary>
         public void PrintAscending()
         {
-            throw new NotImplementedException();
+            BSTNode currentNode = root;
+
+            Travers(currentNode);
+
+            void Travers(BSTNode node)
+            {
+                if ((currentNode.LeftNode is null) && currentNode.RightNode is null)
+                {
+                    Console.Write(currentNode.Value + " ");
+                    return;
+                }
+                else if (currentNode.LeftNode is null)
+                {
+                    currentNode = currentNode.RightNode;
+                }
+                else
+                {
+                    currentNode = currentNode.LeftNode;
+                }
+                Travers(currentNode);
+            }
+            // throw new NotImplementedException();
         }
-        
+
         /// <summary>
         /// The method prints the content of the tree in the descending order
         /// </summary>
@@ -199,8 +250,7 @@ namespace BST_Tree
         /// <summary>
         /// The method returns the height of the tree
         /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <returns>Returns the height of the tree as an uint number</returns>
         private uint GetHeigh()
         {
             uint height = 0;

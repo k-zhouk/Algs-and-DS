@@ -15,8 +15,9 @@ namespace BST_Tree
             testTree.Add(55);
             testTree.Add(20);
 
-            // BST tree methods
+            testTree.PrintAscending();
 
+            // BST tree methods
             uint count = testTree.Count;
             Debug.WriteLine($"Number of elements: {count}");
 

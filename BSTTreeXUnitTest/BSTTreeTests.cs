@@ -87,7 +87,117 @@ namespace BSTTreeXUnitTest
         #endregion
 
         #region *************** Deleting nodes ***************
+        [Fact]
+        public void DeleteNodeFromEmptyTree()
+        {
+            BSTTree testTree = new();
 
+            bool deletionResult = testTree.Delete(50);
+
+            Assert.False(deletionResult);
+            Assert.Equal((uint)0, testTree.Count);
+            Assert.NotNull(testTree);
+        }
+
+        [Fact]
+        public void DeleteNodeFromOneNodeTree()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+
+            bool deletionResult = testTree.Delete(50);
+
+            Assert.True(deletionResult);
+            Assert.Equal((uint)0, testTree.Count);
+            Assert.NotNull(testTree);
+        }
+
+        [Fact]
+        public void DeleteNonExistingNodeFromTree()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(11);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+
+            bool deletionResult = testTree.Delete(25);
+            Assert.False(deletionResult);
+
+            // The number of nodes should not change
+            Assert.Equal((uint)7, testTree.Count);
+        }
+
+        [Fact]
+        public void DeleteRootNodeFromTree()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(11);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+
+            bool deletionResult = testTree.Delete(50);
+
+            Assert.True(deletionResult);
+            Assert.NotNull(testTree);
+            Assert.Equal((uint)6, testTree.Count);
+            Assert.False(testTree.Contains(50));
+
+            // The height of the tree should not change, as the "60" node will move to the root, so the left sub-tree and its height will remain as is
+            Assert.Equal((uint)4, testTree.Height);
+        }
+
+        [Fact]
+        public void DeleteNodeWithNoChildren()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(11);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+
+            bool deletionResults= testTree.Delete(20);
+
+            Assert.True(deletionResults);
+            Assert.NotNull(testTree);
+            Assert.Equal((uint)6, testTree.Count);
+            Assert.False(testTree.Contains(20));
+
+            // The height of the tree should decrease by 1 from 4 to 3
+            Assert.Equal((uint)3, testTree.Height);
+        }
+
+        [Fact]
+        public void DelteNodeWithLeftNullChildAndRightChild()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void DelteNodeWithLeftChildAndNullRightChild()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void DelteNodeWithTwoChildren()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region *************** Contains tests ***************
@@ -100,7 +210,7 @@ namespace BSTTreeXUnitTest
 
             Assert.False(res);
         }
-        
+
         [Fact]
         public void ContainsForExistingOneNodeTest()
         {
@@ -110,7 +220,7 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
         }
-        
+
         [Fact]
         public void ContainsForNonExistingOneNodeTest()
         {
@@ -120,7 +230,7 @@ namespace BSTTreeXUnitTest
 
             Assert.False(res);
         }
-        
+
         [Fact]
         public void ContainsForExistingNodeTest()
         {
@@ -138,7 +248,7 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
         }
-        
+
         [Fact]
         public void ContainsForNonExistingNodeTest()
         {
@@ -160,7 +270,7 @@ namespace BSTTreeXUnitTest
 
         #region *************** Other tests **********
         [Fact]
-        public void ClearForEmptyList()
+        public void ClearMethodForEmptyList()
         {
             BSTTree testTree = new();
 
@@ -169,9 +279,9 @@ namespace BSTTreeXUnitTest
             Assert.NotNull(testTree);
             Assert.Equal((uint)0, testTree.Count);
         }
-        
+
         [Fact]
-        public void ClearForNonEmptyList()
+        public void ClearMethodForNonEmptyList()
         {
             BSTTree testTree = new();
 
