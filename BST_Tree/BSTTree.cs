@@ -31,6 +31,7 @@ namespace BST_Tree
             if (root == null)
             {
                 root = newNode;
+                _count++;
                 return true;
             }
 
@@ -42,6 +43,7 @@ namespace BST_Tree
                     if (currentNode.LeftNode is null)
                     {
                         currentNode.LeftNode = newNode;
+                        _count++;
                         return true;
                     }
                     else currentNode = currentNode.LeftNode;
@@ -51,6 +53,7 @@ namespace BST_Tree
                     if (currentNode.RightNode is null)
                     {
                         currentNode.RightNode = newNode;
+                        _count++;
                         return true;
                     }
                     else currentNode = currentNode.RightNode;
@@ -58,7 +61,6 @@ namespace BST_Tree
                 // Break if the value is already in the tree
                 else if (currentNode.Value == newNode.Value) break;
             }
-
             return false;
         }
 
@@ -69,32 +71,77 @@ namespace BST_Tree
         /// <returns>Returns true if a node was deleted</returns>
         public bool Delete(int value)
         {
-            // Case 1: the tree is empty
+            // The tree is empty, there is nothing to delete
             if (root is null)
             {
+                _count = 0;
                 return false;
             }
 
-            // Case 2: deleting the root
-            if (root.Value == value)
+            // Deleting the root of the tree, if it's the only node
+            if ((root.Value == value) && (root.LeftNode is null) && (root.RightNode is null))
             {
                 root = null;
+                _count = 0;
                 return true;
             }
 
-            BSTNode topNode = null;
+            BSTNode parentNode = null;
             BSTNode currentNode = root;
 
-            while (!(currentNode is null))
+            // Looking for a spcified value
+            while (currentNode.Value != value)
             {
-                // Case 3: deleting a node with no children
-                if ((currentNode.LeftNode is null) && (currentNode.RightNode is null))
+                if (value > currentNode.Value)
                 {
-
+                    parentNode = currentNode;
+                    currentNode = currentNode.RightNode;
                 }
-                // Case 4: deleting a ...
-                // Case 5: deleting a ...
+                else
+                {
+                    parentNode = currentNode;
+                    currentNode = currentNode.LeftNode;
+                }
+
+                // The currentNode becomes null in case a value provided is not in the tree
+                if (currentNode is null)
+                {
+                    return false;
+                }
             }
+
+            // Case 1: Deleting a node with no children
+            if ((currentNode.LeftNode is null) && (currentNode.RightNode is null))
+            {
+                // currentNode = null;
+                // Deletion as the above is not working, need to work it through the deletion of the RIGHT and LEFT nodes of the parent
+
+                parentNode.LeftNode = null;
+                parentNode.RightNode = null;
+                _count--;
+
+                return true;
+            }
+
+            // Case 2.1: Deleting a node with 1 child- No LEFT child
+            if ((currentNode.LeftNode is null) && !(currentNode.RightNode is null))
+            {
+                parentNode.RightNode = currentNode.RightNode;
+                _count--;
+
+                return true;
+            }
+            // Case 2.2: Deleting a node with 1 child- No RIGHT child
+            if (!(currentNode.LeftNode is null) && (currentNode.RightNode is null))
+            {
+                parentNode.RightNode = currentNode.LeftNode;
+                _count--;
+
+                return true;
+            }
+
+            // Case 3: Deleting a node with 2 children
+
 
             return false;
         }
@@ -130,16 +177,15 @@ namespace BST_Tree
         /// Method finds a node with the minimum value
         /// </summary>
         /// <returns>Minmum value as an integer</returns>
+        /// <exception cref="InvalidOperationException">Exception is thrown if the tree is empty</exception>
         public int GetMinimum()
         {
-            BSTNode currentNode = root;
-
             // Case 1: The tree is empty
             if (root is null)
             {
                 throw new InvalidOperationException("The tree is empty and doesn't contain any nodes");
             }
-            
+
             // Case 2: The tree has only a root node
             if ((root.LeftNode is null) && (root.RightNode is null))
             {
@@ -147,16 +193,42 @@ namespace BST_Tree
             }
 
             // Case 3: The tree has more than 1 node
-            throw new NotImplementedException();
+            BSTNode currentNode = root;
+
+            while (!(currentNode.LeftNode is null))
+            {
+                currentNode = currentNode.LeftNode;
+            }
+            return currentNode.Value;
         }
 
         /// <summary>
         /// Method returns a node with the maximum value
         /// </summary>
         /// <returns>Maximum value as an integer</returns>
+        /// <exception cref="InvalidOperationException">Exception is thrown if the tree is empty</exception>
         public int GetMaximum()
         {
-            throw new NotImplementedException();
+            // Case 1: The tree is empty
+            if (root is null)
+            {
+                throw new InvalidOperationException("The tree is empty and doesn't contain any nodes");
+            }
+
+            // Case 2: The tree has only a root node
+            if ((root.LeftNode is null) && (root.RightNode is null))
+            {
+                return root.Value;
+            }
+
+            // Case 3: The tree has more than 1 node. A node with the maximum value will be the rightmost node
+            BSTNode currentNode = root;
+
+            while (!(currentNode.RightNode is null))
+            {
+                currentNode = currentNode.RightNode;
+            }
+            return currentNode.Value;
         }
 
         /// <summary>
@@ -165,6 +237,7 @@ namespace BST_Tree
         public void Clear()
         {
             root = null;
+            _count = 0;
         }
         #endregion
 
@@ -208,16 +281,11 @@ namespace BST_Tree
         #endregion
 
         #region *************** Tree properties ***************
-        // The readonly property contains the number of elements in the tree.
+        // The readonly property contains the number of elements in the tree
         private uint _count = 0;
         public uint Count
         {
-            get
-            {
-                _count = 0;
-                GetCount(root);
-                return _count;
-            }
+            get => _count;
         }
 
         // The read-only property contains the height of the tree
@@ -228,24 +296,6 @@ namespace BST_Tree
         #endregion
 
         #region *************** Private methods ***************
-        /// <summary>
-        /// Method returns number of items in the tree. The number of nodes is counted by traversing the tree
-        /// </summary>
-        /// <param name="node"></param>
-        private void GetCount(BSTNode node)
-        {
-            if (node is null)
-            {
-                return;
-                // Every time we visit a node that is not null, we increase the private _count variable (extrnal to the method)
-            }
-            else _count++;
-
-            GetCount(node.LeftNode);
-            GetCount(node.RightNode);
-
-            return;
-        }
 
         /// <summary>
         /// The method returns the height of the tree
@@ -253,7 +303,6 @@ namespace BST_Tree
         /// <returns>Returns the height of the tree as an uint number</returns>
         private uint GetHeigh()
         {
-            uint height = 0;
             throw new NotImplementedException();
         }
         #endregion

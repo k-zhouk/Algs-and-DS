@@ -192,9 +192,8 @@ namespace LinkedList
                 return false;
             }
 
-            Node node = new Node(value);
             // Check if the 2nd node is our node
-            if (head.nextNode.Value == node.Value)
+            if (head.nextNode.Value == value)
             {
                 DeleteFirstNode();
                 _nodesCounter--;
@@ -203,15 +202,15 @@ namespace LinkedList
             else
             {
                 // We start search from the 2nd node.
-                Node prevNode = head;
+                Node previousNode = head;
                 Node currentNode = head.nextNode;
 
                 while (!(currentNode is null))
                 {
-                    if (currentNode.Value == node.Value)
+                    if (currentNode.Value == value)
                     {
                         Node newCurrentNode = head;
-                        while (newCurrentNode.nextNode.Value != prevNode.Value)
+                        while (newCurrentNode.nextNode.Value != previousNode.Value)
                         {
                             newCurrentNode = newCurrentNode.nextNode;
                         }
@@ -219,7 +218,7 @@ namespace LinkedList
                         _nodesCounter--;
                         return true;
                     }
-                    prevNode = currentNode;
+                    previousNode = currentNode;
                     currentNode = currentNode.nextNode;
                 }
             }
@@ -235,8 +234,7 @@ namespace LinkedList
             }
 
             // Check if our node is the last one
-            Node node = new Node(value);
-            if (tail.Value == node.Value)
+            if (tail.Value == value)
             {
                 return false;
             }
@@ -245,7 +243,7 @@ namespace LinkedList
                 Node currentNode = head;
                 while (!(currentNode is null))
                 {
-                    if (currentNode.Value == node.Value)
+                    if (currentNode.Value == value)
                     {
                         if (currentNode.nextNode.nextNode is null)
                         {
@@ -288,8 +286,8 @@ namespace LinkedList
                 return true;
             }
 
-            Node currentNode = head;
-            Node previousNode = head.nextNode;
+            Node previousNode = head;
+            Node currentNode = head.nextNode;
 
             while (!(currentNode is null))
             {
@@ -331,7 +329,10 @@ namespace LinkedList
                 currentNode = currentNode.nextNode;
             }
         }
+        #endregion
 
+        #region ********** Other list methods **********
+        
         /// <summary>
         /// The method clears the list
         /// </summary>
@@ -340,9 +341,7 @@ namespace LinkedList
             head = tail = null;
             _nodesCounter = 0;
         }
-        #endregion
 
-        #region ********** Other list methods **********
         /// <summary>
         /// The method prints the values of the list if it's not empty
         /// </summary>
@@ -414,6 +413,7 @@ namespace LinkedList
         }
         #endregion
 
+        #region ********** Internal node class **********
         /// <summary>
         /// The internal Node class implements a linked list node.
         /// The node contains a value and a link to the next node.
@@ -431,5 +431,6 @@ namespace LinkedList
             public int Value { get; set; }
             public Node nextNode;
         }
+        #endregion
     }
 }
