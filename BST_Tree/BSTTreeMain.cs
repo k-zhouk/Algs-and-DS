@@ -65,10 +65,6 @@ namespace BST_Tree
             res = true;
             res = testTree.Delete(100500);
 
-            // Case 2: deletion of the root node
-            res = true;
-            res = testTree.Delete(50);
-
             // Adding some nodes into the tree again
             testTree.Add(50);
             testTree.Add(10);
@@ -93,9 +89,24 @@ namespace BST_Tree
             res = testTree.Delete(60);
             res = testTree.Add(60);
 
+            testTree.Clear();
+
             // Case 5: deletion of a node with LEFT and RIGHT child
+            testTree.Add(50);
+            testTree.Add(10);
+            testTree.Add(60);
+            testTree.Add(7);
+            testTree.Add(15);
+            testTree.Add(55);
+            testTree.Add(20);
+            testTree.Add(14);
+            testTree.Add(13);
+            testTree.Add(18);
+            testTree.Add(22);
+            testTree.Add(19);
+
             res = false;
-            res = testTree.Delete(10);
+            res = testTree.Delete(15);
 
             // ******************************************************************
 

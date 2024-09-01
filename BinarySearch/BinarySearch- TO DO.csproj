@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3CBAC045-4263-4577-B6A2-8B8802ACC09E}</ProjectGuid>
+    <ProjectGuid>{602BD835-A4C3-49E3-9793-B1938EECB7F2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BST_Tree</RootNamespace>
-    <AssemblyName>BST_Tree</AssemblyName>
+    <RootNamespace>BinarySearch</RootNamespace>
+    <AssemblyName>BinarySearch</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -64,8 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BSTTree.cs" />
-    <Compile Include="BSTTreeMain.cs" />
+    <Compile Include="BinarySearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

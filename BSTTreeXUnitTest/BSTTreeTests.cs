@@ -76,11 +76,16 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
-            bool res = testTree.Add(11);
+            bool res = testTree.Add(15);
 
             Assert.False(res);
         }
@@ -103,7 +108,6 @@ namespace BSTTreeXUnitTest
         public void DeleteNodeFromOneNodeTreeTest()
         {
             BSTTree testTree = new();
-
             _ = testTree.Add(50);
 
             bool deletionResult = testTree.Delete(50);
@@ -122,39 +126,20 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             bool deletionResult = testTree.Delete(25);
             Assert.False(deletionResult);
 
             // The number of nodes should not change
-            Assert.Equal((uint)7, testTree.Count);
-        }
-
-        [Fact]
-        public void DeleteRootNodeFromTreeTest()
-        {
-            BSTTree testTree = new();
-
-            _ = testTree.Add(50);
-            _ = testTree.Add(10);
-            _ = testTree.Add(60);
-            _ = testTree.Add(7);
-            _ = testTree.Add(11);
-            _ = testTree.Add(55);
-            _ = testTree.Add(20);
-
-            bool deletionResult = testTree.Delete(50);
-
-            Assert.True(deletionResult);
-            Assert.NotNull(testTree);
-            Assert.Equal((uint)6, testTree.Count);
-            Assert.False(testTree.Contains(50));
-
-            // The height of the tree should not change, as the "60" node will move to the root, so the left sub-tree and its height will remain as is
-            Assert.Equal((uint)4, testTree.Height);
+            Assert.Equal((uint)12, testTree.Count);
         }
 
         [Fact]
@@ -166,19 +151,24 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
-            bool deletionResults = testTree.Delete(20);
+            bool deletionResults = testTree.Delete(7);
 
             Assert.True(deletionResults);
             Assert.NotNull(testTree);
-            Assert.False(testTree.Contains(20));
-            Assert.Equal((uint)6, testTree.Count);
+            Assert.False(testTree.Contains(7));
+            Assert.Equal((uint)11, testTree.Count);
 
             // The height of the tree should decrease by 1 from 4 to 3
-            Assert.Equal((uint)3, testTree.Height);
+            Assert.Equal((uint)6, testTree.Height);
         }
 
         [Fact]
@@ -190,19 +180,24 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
-            bool deletionResults = testTree.Delete(11);
+            bool deletionResults = testTree.Delete(18);
 
             Assert.True(deletionResults);
             Assert.NotNull(testTree);
-            Assert.False(testTree.Contains(11));
-            Assert.Equal((uint)6, testTree.Count);
+            Assert.False(testTree.Contains(18));
+            Assert.Equal((uint)11, testTree.Count);
 
             // The height of the tree should decrease by 1 from 4 to 3
-            Assert.Equal((uint)3, testTree.Height);
+            Assert.Equal((uint)5, testTree.Height);
         }
 
         [Fact]
@@ -214,19 +209,24 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
-            bool deletionResults = testTree.Delete(60);
+            bool deletionResults = testTree.Delete(14);
 
             Assert.True(deletionResults);
             Assert.NotNull(testTree);
-            Assert.False(testTree.Contains(60));
-            Assert.Equal((uint)6, testTree.Count);
+            Assert.False(testTree.Contains(14));
+            Assert.Equal((uint)11, testTree.Count);
 
             // The height of the tree should decrease by 1 from 4 to 3
-            Assert.Equal((uint)3, testTree.Height);
+            Assert.Equal((uint)6, testTree.Height);
         }
 
         [Fact]
@@ -238,7 +238,30 @@ namespace BSTTreeXUnitTest
         [Fact]
         public void DeleteRootNodeWithTwoChildrenTest()
         {
-            throw new NotImplementedException();
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            bool deletionResult = testTree.Delete(50);
+
+            Assert.True(deletionResult);
+            Assert.NotNull(testTree);
+            Assert.Equal((uint)11, testTree.Count);
+            Assert.False(testTree.Contains(50));
+
+            // The height of the tree should not change, as the "60" node will move to the root, so the left sub-tree and its height will remain as is
+            Assert.Equal((uint)6, testTree.Height);
         }
         #endregion
 
@@ -271,9 +294,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             int minimumValue = testTree.GetMinimum();
 
@@ -308,9 +336,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             int maximumValue = testTree.GetMaximum();
 
@@ -359,9 +392,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             bool res = testTree.Contains(7);
 
@@ -377,9 +415,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             bool res = testTree.Contains(100);
 
@@ -418,13 +461,18 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             uint count = testTree.Count;
 
-            Assert.Equal((uint)7, count);
+            Assert.Equal((uint)12, count);
         }
         #endregion
 
@@ -449,9 +497,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             testTree.Clear();
 
@@ -517,9 +570,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             uint height = testTree.Height;
             Assert.Equal((uint)4, height);
@@ -534,9 +592,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             uint height = testTree.Height;
             Assert.Equal((uint)4, height);
@@ -545,7 +608,7 @@ namespace BSTTreeXUnitTest
             height = testTree.Height;
             Assert.Equal((uint)4, height);
         }
-        
+
         [Fact]
         public void NonDecreaseOfHeightAfterDeletingNodeTest()
         {
@@ -555,9 +618,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             uint height = testTree.Height;
             Assert.Equal((uint)4, height);
@@ -576,9 +644,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             uint height = testTree.Height;
             Assert.Equal((uint)4, height);
@@ -587,7 +660,7 @@ namespace BSTTreeXUnitTest
             height = testTree.Height;
             Assert.Equal((uint)5, height);
         }
-        
+
         [Fact]
         public void NonIncreaseOfHeightAfterAddingNodeTest()
         {
@@ -597,9 +670,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
-            _ = testTree.Add(11);
+            _ = testTree.Add(15);
             _ = testTree.Add(55);
             _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
 
             uint height = testTree.Height;
 

@@ -114,10 +114,16 @@ namespace BST_Tree
             if ((currentNode.LeftNode is null) && (currentNode.RightNode is null))
             {
                 // currentNode = null;
-                // Deletion as the above is not working, need to work it through the deletion of the RIGHT and LEFT nodes of the parent
+                // Deletion as above is not working, need to work it through the deletion of the RIGHT and LEFT nodes of the parent
 
-                parentNode.LeftNode = null;
-                parentNode.RightNode = null;
+                if (parentNode.LeftNode == currentNode)
+                {
+                    parentNode.LeftNode = null;
+                }
+                else
+                {
+                    parentNode.RightNode = null;
+                }
                 _count--;
 
                 return true;
