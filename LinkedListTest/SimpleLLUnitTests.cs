@@ -1,4 +1,7 @@
 using LinkedList;
+using Xunit;
+using System;
+using System.IO;
 
 namespace LinkedListTest
 {
@@ -1092,7 +1095,7 @@ namespace LinkedListTest
             SimpleLinkedList testList = new SimpleLinkedList();
 
             int testValue = 10;
-            for (int i = 1; i <= 5; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 testList.AddFirst(testValue);
             }

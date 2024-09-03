@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strings Search", "Strings S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearSearch", "LinearSearch\LinearSearch.csproj", "{1E54B85C-3B06-4C11-9B8D-20EADD93EBD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch- TO DO", "BinarySearch\BinarySearch- TO DO.csproj", "{602BD835-A4C3-49E3-9793-B1938EECB7F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySearch", "BinarySearch\BinarySearch.csproj", "{602BD835-A4C3-49E3-9793-B1938EECB7F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearStringSearch- TO DO", "LinearStringSearch\LinearStringSearch- TO DO.csproj", "{05420639-4EAC-41B2-A0EE-27E2F1BCC1EA}"
 EndProject

@@ -304,35 +304,40 @@ namespace LinkedList
             return false;
         }
 
-        public void DeleteAllOccurrences(int value)
+        public bool DeleteAllOccurrences(int value)
         {
             // Nothing to delete for an empty list
             if (head is null)
             {
-                return;
+                return false;
             }
 
             // Deletion for a one node list
-            if ((head.nextNode is null) && (head.Value == value))
+            if ((head.Value == value) && (head.nextNode is null))
             {
                 head = tail = null;
                 _nodesCounter = 0;
-                return;
+                return true;
             }
 
-            Node currentNode = head.nextNode;
-            Node previousNode = head;
-
-            // TO DO: To implement
-            while (!(currentNode is null))
+            uint maxIterations = _nodesCounter;
+            for (int i = 0; i < maxIterations; i++)
             {
-                currentNode = currentNode.nextNode;
+                if (Delete(value))
+                {
+                    _nodesCounter --;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            return true;
         }
         #endregion
 
         #region ********** Other list methods **********
-        
+
         /// <summary>
         /// The method clears the list
         /// </summary>
