@@ -5,7 +5,7 @@ using System.IO;
 
 namespace LinkedListTest
 {
-    public class SimpleLLUnitTests
+    public class SimpleLLTests
     {
         [Fact]
         public void CreateEmptyListTest()
@@ -1012,32 +1012,9 @@ namespace LinkedListTest
 
             // Asserts
             Assert.NotNull(testList);
-            Assert.Equal(1, testList.HeadValue);
-            Assert.Equal(1, testList.TailValue);
-            Assert.Equal((uint)1, testList.Count);
-        }
-
-        [Fact]
-        public void DeleteAllOccurrencesHeadTest()
-        {
-            // Arrange
-            StringWriter sw = new StringWriter();
-            Console.SetOut(sw);
-
-            SimpleLinkedList testList = new SimpleLinkedList(1);
-
-            for (int i = 1; i <= 5; i++)
-            {
-                testList.AddFirst(i);
-            }
-
-            // Act
-            testList.DeleteAllOccurrences(5);
-            testList.PrintList();
-
-            // Asserts
-            Assert.Equal("4 3 2 1", sw.ToString());
-            Assert.Equal((uint)4, testList.Count);
+            Assert.Null(testList.HeadValue);
+            Assert.Null(testList.TailValue);
+            Assert.Equal((uint)0, testList.Count);
         }
 
         [Fact]
@@ -1059,9 +1036,34 @@ namespace LinkedListTest
             testList.PrintList();
 
             // Asserts
-            Assert.Equal(5, testList.HeadValue);
-            Assert.Equal(2, testList.TailValue);
+            Assert.Equal("5 4 3 2", sw.ToString());
             Assert.Equal((uint)4, testList.Count);
+        }
+
+        [Fact]
+        public void DeleteAllOccurrencesHeadTest()
+        {
+            // Arrange
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            SimpleLinkedList testList = new SimpleLinkedList();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                testList.AddFirst(i);
+            }
+            testList.AddFirst(5);
+            
+            // Act
+            testList.DeleteAllOccurrences(5);
+            testList.PrintList();
+
+            // Asserts
+            Assert.Equal(4, testList.HeadValue);
+            Assert.Equal(1, testList.TailValue);
+            Assert.Equal((uint)4, testList.Count);
+            Assert.Equal("4 3 2 1", sw.ToString());
         }
 
         [Fact]
@@ -1094,15 +1096,15 @@ namespace LinkedListTest
             // Arrange
             SimpleLinkedList testList = new SimpleLinkedList();
 
-            int testValue = 10;
-            for (int i = 1; i <= 10; i++)
+            int testValue = 5;
+            for (int i = 1; i <= 3; i++)
             {
                 testList.AddFirst(testValue);
             }
 
             // Act
             testList.DeleteAllOccurrences(testValue);
-            testList.PrintList();
+//            testList.PrintList();
 
             // Asserts
             Assert.NotNull(testList);

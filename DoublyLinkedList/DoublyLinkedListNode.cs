@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DoublyLinkedList
+﻿namespace DoublyLinkedList
 {
     /// <summary>
     /// Class for a doubly linked list node.

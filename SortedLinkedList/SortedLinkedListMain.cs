@@ -1,4 +1,4 @@
-﻿namespace SortedLinkedListNameSpace
+﻿namespace SortedLinkedListNS
 {
     class SortedLinkedListMain
     {

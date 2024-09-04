@@ -320,19 +320,16 @@ namespace LinkedList
                 return true;
             }
 
+            bool nodeDeleted = false;
             uint maxIterations = _nodesCounter;
             for (int i = 0; i < maxIterations; i++)
             {
                 if (Delete(value))
                 {
-                    _nodesCounter --;
-                }
-                else
-                {
-                    return false;
+                    nodeDeleted = true;
                 }
             }
-            return true;
+            return nodeDeleted;
         }
         #endregion
 

@@ -1,11 +1,11 @@
-using SortedLinkedListNameSpace;
+using SortedLinkedListNS;
 using Xunit;
 using System.IO;
 using System;
 
 namespace SortedLinkedListXUnitTest
 {
-    public class SortedLLUnitTests
+    public class SortedLLTests
     {
         [Fact]
         public void CreateEmptyListTest()

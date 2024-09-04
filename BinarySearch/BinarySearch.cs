@@ -1,4 +1,5 @@
 ﻿using System;
+using static BinarySearchNS.BinarySearcher;
 
 namespace BinarySearchNS
 {
@@ -23,7 +24,7 @@ namespace BinarySearchNS
             int testValue = rnd.Next((int)(ushort.MaxValue * 1.5));
 
             SearchResult srTest = new SearchResult();
-            srTest = BinarySearcher.BinarySearch(testArray, testValue);
+            srTest = BinarySearch(testArray, testValue);
 
             if (srTest.Index != -1)
             {

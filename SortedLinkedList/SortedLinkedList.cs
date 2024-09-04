@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SortedLinkedListNameSpace
+namespace SortedLinkedListNS
 {
     public class SortedLinkedList
     {
