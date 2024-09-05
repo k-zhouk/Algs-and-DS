@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BST_Tree\BST Tree.csproj" />
+    <ProjectReference Include="..\BST_Tree\BST Tree- TO DO.csproj" />
   </ItemGroup>
 
 </Project>

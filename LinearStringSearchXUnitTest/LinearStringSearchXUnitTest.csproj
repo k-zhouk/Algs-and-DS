@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LinearStringSearch\LinearStringSearch- TO DO.csproj" />
+    <ProjectReference Include="..\LinearStringSearch\LinearStringSearch.csproj" />
   </ItemGroup>
 
 </Project>

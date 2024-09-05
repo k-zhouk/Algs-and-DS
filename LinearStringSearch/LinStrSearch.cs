@@ -10,11 +10,16 @@
         /// <returns>Returns an index at which the substring starts or -1 if the substring is not found</returns>
         public static int LinearStringSearch(string inputStr, string subStr)
         {
+            if ((inputStr == string.Empty) || (subStr == string.Empty))
+            {
+                return -1;
+            }
+
             int subStrIndex = -1;
             bool subStrFound = true;
             int maxIteration = inputStr.Length - subStr.Length;
 
-            for (int i = 0; i < maxIteration; i++)
+            for (int i = 0; i <= maxIteration; i++)
             {
                 // If the first letters match, star comparing the further symbols
                 if (inputStr[i] == subStr[0])

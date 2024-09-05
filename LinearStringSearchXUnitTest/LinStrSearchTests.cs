@@ -1,6 +1,6 @@
 using System;
 using Xunit;
-using LinearStringSearchNS;
+using static LinearStringSearchNS.LinStrSearch;
 
 namespace LinearStringSearchXUnitTest
 {
@@ -12,25 +12,64 @@ namespace LinearStringSearchXUnitTest
             string testStr = "";
             string subStr = "";
 
-            throw new NotImplementedException();
+            int index = LinearStringSearch(testStr, subStr);
+
+            Assert.Equal(-1, index);
         }
-        
-        [Fact]
-        public void LinStrSearchInEmptyInputStringTest()
-        {
-            throw new NotImplementedException();
-        }
-        
+
         [Fact]
         public void LinStrSearchWithEmptyInputStringTest()
         {
-            throw new NotImplementedException();
+            string testStr = "";
+            string subStr = "abc";
+
+            int index = LinearStringSearch(testStr, subStr);
+
+            Assert.Equal(-1, index);
         }
-        
+
         [Fact]
         public void LinStrSearchWithEmptySubstringTest()
         {
-            throw new NotImplementedException();
+            string testStr = "abc";
+            string subStr = "";
+
+            int index = LinearStringSearch(testStr, subStr);
+
+            Assert.Equal(-1, index);
+        }
+
+        [Fact]
+        public void LinStrSearchWithSubstringAtBeginningTest()
+        {
+            string testStr = "cde abcd fg a";
+            string testSubstr = "cde";
+
+            int index = LinearStringSearch(testStr, testSubstr);
+
+            Assert.Equal(0, index);
+        }
+
+        [Fact]
+        public void LinStrSearchWithSubstringAtEndTest()
+        {
+            string testStr = "abcd cdfg a cde";
+            string testSubstr = "cde";
+
+            int index = LinearStringSearch(testStr, testSubstr);
+
+            Assert.Equal(12, index);
+        }
+
+        [Fact]
+        public void LinStrSearchWithSubstringInMiddleTest()
+        {
+            string testStr = "abcd cdefg a cde";
+            string testSubstr = "cde";
+
+            int index = LinearStringSearch(testStr, testSubstr);
+
+            Assert.Equal(5, index);
         }
     }
 }

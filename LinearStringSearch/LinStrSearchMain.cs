@@ -10,7 +10,7 @@ namespace LinearStringSearchNS
             string testStr = "cda abcd cdefg a";
             string testSubstr = "cde";
 
-            int subStrIndex= LinearStringSearch(testStr, testSubstr);
+            int subStrIndex = LinearStringSearch(testStr, testSubstr);
 
             Debug.WriteLine($"Test string: {testStr}");
             Debug.WriteLine($"Test substring: {testSubstr}");
