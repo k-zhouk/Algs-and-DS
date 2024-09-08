@@ -1,4 +1,5 @@
-﻿#define ARRAY
+﻿// Two preprocessor options- ARRAY and LIST to be used inside the merging fucntion
+#define ARRAY
 
 using System;
 using System.Diagnostics;
@@ -28,7 +29,7 @@ namespace SortedArraysMerge
 
             int[] a3 = MergeArrays(a1, a2);
 
-            Debug.WriteLine($"\n\nMerged array: ");
+            Debug.WriteLine($"\nMerged array: ");
             for (int i = 0; i < a3.Length; i++)
             {
                 Debug.Write(a3[i] + " ");
@@ -46,40 +47,60 @@ namespace SortedArraysMerge
             int a1Ptr = 0;
             int a2Ptr = 0;
 
+#if LIST
             List<int> merged = new List<int>();
-
+#endif
             while ((a1Ptr < array1.Length) || (a2Ptr < array2.Length))
             {
                 // If we reached the end of the 1st array, add an element from the 2nd
                 if (a1Ptr == array1.Length)
                 {
 #if ARRAY
-                    merged[mPtr]= array2[a2Ptr];
-                    a2Ptr++;
-#endif
+                    mergedArr[mPtr]= array2[a2Ptr];
+                    mPtr++;
+#elif LIST
                     merged.Add(array2[a2Ptr]);
+#endif
                     a2Ptr++;
                 }
 
                 // If we reached the end of the 2nd array, add an elemnt from the 1st
                 else if (a2Ptr == array2.Length)
                 {
+#if ARRAY
+                    mergedArr[mPtr] = array1[a1Ptr];
+                    mPtr++;
+#elif LIST
                     merged.Add(array1[a1Ptr]);
+#endif
                     a1Ptr++;
                 }
                 else if (array1[a1Ptr] < array2[a2Ptr])
                 {
+#if ARRAY
+                    mergedArr[mPtr] = array1[a1Ptr];
+                    mPtr++;
+#elif LIST
                     merged.Add(array1[a1Ptr]);
+#endif
                     a1Ptr++;
                 }
                 else
                 {
+#if ARRAY
+                    mergedArr[mPtr] = array2[a2Ptr];
+                    mPtr++;
+#elif LIST
                     merged.Add(array2[a2Ptr]);
+#endif
                     a2Ptr++;
                 }
             }
-
+#if ARRAY
+            return mergedArr;
+#elif LIST
             return merged.ToArray();
+#endif
         }
     }
 }
