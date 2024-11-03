@@ -16,6 +16,7 @@ namespace BST_Tree
         public BSTTree(int value)
         {
             root = new BSTNode(value);
+            _count = 1;
         }
         #endregion
 
@@ -313,7 +314,7 @@ namespace BST_Tree
         }
         #endregion
 
-        #region *************** BST Node class ***************
+        #region *************** Internal BST Node class ***************
         // For now the class is working with int numbers only
         class BSTNode
         {

@@ -6,27 +6,33 @@ namespace BSTTreeXUnitTest
 {
     public class BSTTreeTests
     {
-        #region *************** BST creation ***************
+        #region *************** GROUP 1 TESTS- BST creation ***************
         [Fact]
-        public void CreateEmptyTreeTest()
+        public void Group1_Creation_CreateEmptyTreeTest()
         {
+            // Arrange
+
+            // Act
             BSTTree testTree = new();
 
+            // Assert
             Assert.NotNull(testTree);
+            Assert.Equal((uint)0, testTree.Count);
         }
 
         [Fact]
-        public void CreateNonEmptyTreeTest()
+        public void Group1_Creation_CreateNonEmptyTreeTest()
         {
-            BSTTree testTree = new(0);
+            BSTTree testTree = new(100500);
 
+            Assert.Equal((uint)1, testTree.Count);
             Assert.NotNull(testTree);
         }
         #endregion
 
-        #region *************** Adding nodes ***************
+        #region *************** GROUP 2 TESTS- Adding nodes ***************
         [Fact]
-        public void AddNewNodeToEmptyTreeTest()
+        public void Group2_Adding_Nodes_AddNewNodeToEmptyTreeTest()
         {
             BSTTree testTree = new();
 
@@ -34,10 +40,11 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
             Assert.NotNull(testTree);
+            Assert.Equal((uint)1, testTree.Count);
         }
 
         [Fact]
-        public void AddNewNodeToNonEmptyTreeTest()
+        public void Group2_Adding_Nodes_AddNewNodeToNonEmptyTreeTest()
         {
             BSTTree testTree = new(0);
 
@@ -45,10 +52,11 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
             Assert.NotNull(testTree);
+            Assert.Equal((uint)2, testTree.Count);
         }
 
         [Fact]
-        public void AddSeveralNewNodesTest()
+        public void Group2_Adding_Nodes_AddSeveralNewNodesTest()
         {
             BSTTree testTree = new();
 
@@ -67,10 +75,12 @@ namespace BSTTreeXUnitTest
             Assert.True(res5);
             Assert.True(res6);
             Assert.True(res7);
+
+            Assert.Equal((uint)7, testTree.Count);
         }
 
         [Fact]
-        public void AddSameNodeTest()
+        public void Group2_Adding_Nodes_AddSameNodeTest()
         {
             BSTTree testTree = new();
 
@@ -90,24 +100,25 @@ namespace BSTTreeXUnitTest
             bool res = testTree.Add(15);
 
             Assert.False(res);
+            Assert.Equal((uint)12, testTree.Count);
         }
         #endregion
 
-        #region *************** Deleting nodes ***************
+        #region *************** GROUP 3 TESTS- Deleting nodes ***************
         [Fact]
-        public void DeleteNodeFromEmptyTreeTest()
+        public void Group3_Deleting_Nodes_DeleteNodeFromEmptyTreeTest()
         {
             BSTTree testTree = new();
 
             bool deletionResult = testTree.Delete(50);
 
             Assert.False(deletionResult);
-            Assert.Equal((uint)0, testTree.Count);
             Assert.NotNull(testTree);
+            Assert.Equal((uint)0, testTree.Count);
         }
 
         [Fact]
-        public void DeleteNodeFromOneNodeTreeTest()
+        public void Group3_Deleting_Nodes_DeleteNodeFromOneNodeTreeTest()
         {
             BSTTree testTree = new();
             _ = testTree.Add(50);
@@ -115,12 +126,12 @@ namespace BSTTreeXUnitTest
             bool deletionResult = testTree.Delete(50);
 
             Assert.True(deletionResult);
-            Assert.Equal((uint)0, testTree.Count);
             Assert.NotNull(testTree);
+            Assert.Equal((uint)0, testTree.Count);
         }
 
         [Fact]
-        public void DeleteNonExistingNodeFromTreeTest()
+        public void Group3_Deleting_Nodes_DeleteNonExistingNodeFromTreeTest()
         {
             BSTTree testTree = new();
 
@@ -145,7 +156,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void DeleteNodeWithNoChildrenTest()
+        public void Group3_Deleting_Nodes_DeleteNodeWithNoChildrenTest()
         {
             BSTTree testTree = new();
 
@@ -174,7 +185,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void DelteNodeWithLeftNullChildAndRightChildTest()
+        public void Group3_Deleting_Nodes_DelteNodeWithLeftNullChildAndRightChildTest()
         {
             BSTTree testTree = new();
 
@@ -203,7 +214,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void DeleteNodeWithLeftChildAndNullRightChildTest()
+        public void Group3_Deleting_Nodes_DeleteNodeWithLeftChildAndNullRightChildTest()
         {
             BSTTree testTree = new();
 
@@ -232,13 +243,13 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void DeleteNodeWithTwoChildrenTest()
+        public void Group3_Deleting_Nodes_DeleteNodeWithTwoChildrenTest()
         {
             throw new NotImplementedException();
         }
 
         [Fact]
-        public void DeleteRootNodeWithTwoChildrenTest()
+        public void Group3_Deleting_Nodes_DeleteRootNodeWithTwoChildrenTest()
         {
             BSTTree testTree = new();
 
@@ -267,9 +278,9 @@ namespace BSTTreeXUnitTest
         }
         #endregion
 
-        #region *************** Maximum and Minimum values tests ***************
+        #region *************** GROUP 4 TESTS- Maximum and Minimum values tests ***************
         [Fact]
-        public void GetMinimumForEmptyTreeTest()
+        public void Group4_Max_Min_GetMinimumForEmptyTreeTest()
         {
             BSTTree testTree = new();
 
@@ -277,7 +288,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void GetMinimumForOneNodeTreeTest()
+        public void Group4_Max_Min_GetMinimumForOneNodeTreeTest()
         {
             BSTTree testTree = new();
             bool res = testTree.Add(50);
@@ -288,7 +299,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void GetMinimumForTreeTest()
+        public void Group4_Max_Min_GetMinimumForTreeTest()
         {
             BSTTree testTree = new();
 
@@ -311,7 +322,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void GetMaximumForEmptyTreeTest()
+        public void Group4_Max_Min_GetMaximumForEmptyTreeTest()
         {
             BSTTree testTree = new();
 
@@ -319,7 +330,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void GetMaximumForOneNodeTreeTest()
+        public void Group4_Max_Min_GetMaximumForOneNodeTreeTest()
         {
             BSTTree testTree = new();
             bool res = testTree.Add(50);
@@ -330,7 +341,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void GetMaximumForTreeTest()
+        public void Group4_Max_Min_GetMaximumForTreeTest()
         {
             BSTTree testTree = new();
 
@@ -354,9 +365,9 @@ namespace BSTTreeXUnitTest
 
         #endregion
 
-        #region *************** Contains tests ***************
+        #region *************** GROUP 5 TESTS- Contains tests ***************
         [Fact]
-        public void ContainsForEmptyTreeTest()
+        public void Group5_Contains_ContainsForEmptyTreeTest()
         {
             BSTTree testTree = new();
 
@@ -364,9 +375,9 @@ namespace BSTTreeXUnitTest
 
             Assert.False(res);
         }
-
-        [Fact]
-        public void ContainsForExistingOneNodeTest()
+                         
+        [Fact]           
+        public void Group5_Contains_ContainsForExistingOneNodeTest()
         {
             BSTTree testTree = new(1);
 
@@ -374,9 +385,9 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
         }
-
-        [Fact]
-        public void ContainsForNonExistingOneNodeTest()
+                         
+        [Fact]           
+        public void Group5_Contains_ContainsForNonExistingOneNodeTest()
         {
             BSTTree testTree = new(1);
 
@@ -384,9 +395,9 @@ namespace BSTTreeXUnitTest
 
             Assert.False(res);
         }
-
-        [Fact]
-        public void ContainsForExistingNodeTest()
+                         
+        [Fact]           
+        public void Group5_Contains_ContainsForExistingNodeTest()
         {
             BSTTree testTree = new();
 
@@ -407,9 +418,9 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
         }
-
-        [Fact]
-        public void ContainsForNonExistingNodeTest()
+                         
+        [Fact]           
+        public void Group5_Contains_ContainsForNonExistingNodeTest()
         {
             BSTTree testTree = new();
 
@@ -432,9 +443,9 @@ namespace BSTTreeXUnitTest
         }
         #endregion
 
-        #region *************** Count tests **********
+        #region *************** GROUP 6 TESTS- Count tests **********
         [Fact]
-        public void CountForEmptyTreeTest()
+        public void Group6_Count_CountForEmptyTreeTest()
         {
             BSTTree testTree = new();
 
@@ -443,8 +454,8 @@ namespace BSTTreeXUnitTest
             Assert.Equal((uint)0, count);
         }
 
-        [Fact]
-        public void CountForOneNodeTreeTest()
+        [Fact]           
+        public void Group6_Count_CountForOneNodeTreeTest()
         {
             BSTTree testTree = new();
             _ = testTree.Add(50);
@@ -454,8 +465,8 @@ namespace BSTTreeXUnitTest
             Assert.Equal((uint)1, count);
         }
 
-        [Fact]
-        public void CountTreeTest()
+        [Fact]           
+        public void Group6_Count_CountTreeTest()
         {
             BSTTree testTree = new();
 
@@ -478,9 +489,9 @@ namespace BSTTreeXUnitTest
         }
         #endregion
 
-        #region *************** Clear tests **********
+        #region *************** GROUP 7 TESTS- Clear tests **********
         [Fact]
-        public void ClearMethodForEmptyListTest()
+        public void Group7_Clear_ClearMethodForEmptyListTest()
         {
             BSTTree testTree = new();
 
@@ -491,7 +502,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void ClearMethodForNonEmptyListTest()
+        public void Group7_Clear_ClearMethodForNonEmptyListTest()
         {
             BSTTree testTree = new();
 
@@ -515,35 +526,35 @@ namespace BSTTreeXUnitTest
         }
         #endregion
 
-        #region *************** Print tests **********
+        #region *************** GROUP 8 TESTS- Print tests **********
         [Fact]
-        public void PrintAscendingEmptyTreeTest()
+        public void Group8_Print_PrintAscendingEmptyTreeTest()
         {
             throw new NotImplementedException();
         }
 
         [Fact]
-        public void PrintAscendingTreeTest()
+        public void Group8_Print_PrintAscendingTreeTest()
         {
             throw new NotImplementedException();
         }
 
         [Fact]
-        public void PrintDescendingEmptyTreeTest()
+        public void Group8_Print_PrintDescendingEmptyTreeTest()
         {
             throw new NotImplementedException();
         }
 
         [Fact]
-        public void PrintDescendingTreeTest()
+        public void Group8_Print_PrintDescendingTreeTest()
         {
             throw new NotImplementedException();
         }
         #endregion
 
-        #region *************** Height tests **********
+        #region *************** GROUP 9 TESTS- Height tests **********
         [Fact]
-        public void HeightOfEmptyTreeTest()
+        public void Group9_Height_HeightOfEmptyTreeTest()
         {
             BSTTree testTree = new();
 
@@ -553,7 +564,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void HeightOfOneNodeTreeTest()
+        public void Group9_Height_HeightOfOneNodeTreeTest()
         {
             BSTTree testTree = new();
             _ = testTree.Add(50);
@@ -564,7 +575,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void HeightOfTreeTest()
+        public void Group9_Height_HeightOfTreeTest()
         {
             BSTTree testTree = new();
 
@@ -586,7 +597,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void DecreaseOfHeightAfterDeletingNodeTest()
+        public void Group9_Height_DecreaseOfHeightAfterDeletingNodeTest()
         {
             BSTTree testTree = new();
 
@@ -612,7 +623,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void NonDecreaseOfHeightAfterDeletingNodeTest()
+        public void Group9_Height_NonDecreaseOfHeightAfterDeletingNodeTest()
         {
             BSTTree testTree = new();
 
@@ -638,7 +649,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void IncreaseOfHeightAfterAddingNodeTest()
+        public void Group9_Height_IncreaseOfHeightAfterAddingNodeTest()
         {
             BSTTree testTree = new();
 
@@ -664,7 +675,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void NonIncreaseOfHeightAfterAddingNodeTest()
+        public void Group9_Height_NonIncreaseOfHeightAfterAddingNodeTest()
         {
             BSTTree testTree = new();
 
@@ -690,7 +701,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void HeightOfScewedTreeTest()
+        public void Group9_Height_HeightOfScewedTreeTest()
         {
             BSTTree testTree = new();
 
