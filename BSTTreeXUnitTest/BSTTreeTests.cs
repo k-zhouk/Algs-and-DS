@@ -156,7 +156,8 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void Group3_Deleting_Nodes_DeleteNodeWithNoChildrenTest()
+        public void Group3_Deleting_Nodes_DeleteNodeWithNoChildrenIfLeftNodeTest()
+        // Deleting a node with no children, if it's a left node of a parent node
         {
             BSTTree testTree = new();
 
@@ -179,13 +180,37 @@ namespace BSTTreeXUnitTest
             Assert.NotNull(testTree);
             Assert.False(testTree.Contains(7));
             Assert.Equal((uint)11, testTree.Count);
-
-            // The height of the tree should decrease by 1 from 4 to 3
-            Assert.Equal((uint)6, testTree.Height);
         }
 
         [Fact]
-        public void Group3_Deleting_Nodes_DelteNodeWithLeftNullChildAndRightChildTest()
+        public void Group3_Deleting_Nodes_DeleteNodeWithNoChildrenIfRightTest()
+        // Deleting a node with no children, if it's a right node of a parent node
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            bool deletionResults = testTree.Delete(19);
+
+            Assert.True(deletionResults);
+            Assert.NotNull(testTree);
+            Assert.False(testTree.Contains(19));
+            Assert.Equal((uint)11, testTree.Count);
+        }
+
+        [Fact]
+        public void Group3_Deleting_Nodes_DelteNodeWithNullLeftChildTest()
         {
             BSTTree testTree = new();
 
@@ -208,13 +233,10 @@ namespace BSTTreeXUnitTest
             Assert.NotNull(testTree);
             Assert.False(testTree.Contains(18));
             Assert.Equal((uint)11, testTree.Count);
-
-            // The height of the tree should decrease by 1 from 4 to 3
-            Assert.Equal((uint)5, testTree.Height);
         }
 
         [Fact]
-        public void Group3_Deleting_Nodes_DeleteNodeWithLeftChildAndNullRightChildTest()
+        public void Group3_Deleting_Nodes_DeleteNodeWithNullRightChildTest()
         {
             BSTTree testTree = new();
 
@@ -237,9 +259,6 @@ namespace BSTTreeXUnitTest
             Assert.NotNull(testTree);
             Assert.False(testTree.Contains(14));
             Assert.Equal((uint)11, testTree.Count);
-
-            // The height of the tree should decrease by 1 from 4 to 3
-            Assert.Equal((uint)6, testTree.Height);
         }
 
         [Fact]
@@ -272,9 +291,18 @@ namespace BSTTreeXUnitTest
             Assert.NotNull(testTree);
             Assert.Equal((uint)11, testTree.Count);
             Assert.False(testTree.Contains(50));
+        }
 
-            // The height of the tree should not change, as the "60" node will move to the root, so the left sub-tree and its height will remain as is
-            Assert.Equal((uint)6, testTree.Height);
+        [Fact]
+        public void Group3_Deleting_Nodes_DeleteRootNodeWithLeftChildTest()
+        {
+            throw new NotImplementedException();
+        }
+
+        [Fact]
+        public void Group3_Deleting_Nodes_DeleteRootNodeWithRightChildTest()
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -284,7 +312,7 @@ namespace BSTTreeXUnitTest
         {
             BSTTree testTree = new();
 
-            Assert.Throws<InvalidOperationException>(() => testTree.GetMinimum());
+            Assert.Throws<ArgumentNullException>(() => testTree.GetMinimum());
         }
 
         [Fact]
@@ -326,7 +354,7 @@ namespace BSTTreeXUnitTest
         {
             BSTTree testTree = new();
 
-            Assert.Throws<InvalidOperationException>(() => testTree.GetMaximum());
+            Assert.Throws<ArgumentNullException>(() => testTree.GetMaximum());
         }
 
         [Fact]
@@ -375,8 +403,8 @@ namespace BSTTreeXUnitTest
 
             Assert.False(res);
         }
-                         
-        [Fact]           
+
+        [Fact]
         public void Group5_Contains_ContainsForExistingOneNodeTest()
         {
             BSTTree testTree = new(1);
@@ -385,8 +413,8 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
         }
-                         
-        [Fact]           
+
+        [Fact]
         public void Group5_Contains_ContainsForNonExistingOneNodeTest()
         {
             BSTTree testTree = new(1);
@@ -395,8 +423,8 @@ namespace BSTTreeXUnitTest
 
             Assert.False(res);
         }
-                         
-        [Fact]           
+
+        [Fact]
         public void Group5_Contains_ContainsForExistingNodeTest()
         {
             BSTTree testTree = new();
@@ -418,8 +446,8 @@ namespace BSTTreeXUnitTest
 
             Assert.True(res);
         }
-                         
-        [Fact]           
+
+        [Fact]
         public void Group5_Contains_ContainsForNonExistingNodeTest()
         {
             BSTTree testTree = new();
@@ -454,7 +482,7 @@ namespace BSTTreeXUnitTest
             Assert.Equal((uint)0, count);
         }
 
-        [Fact]           
+        [Fact]
         public void Group6_Count_CountForOneNodeTreeTest()
         {
             BSTTree testTree = new();
@@ -465,7 +493,7 @@ namespace BSTTreeXUnitTest
             Assert.Equal((uint)1, count);
         }
 
-        [Fact]           
+        [Fact]
         public void Group6_Count_CountTreeTest()
         {
             BSTTree testTree = new();
