@@ -81,7 +81,7 @@ namespace BST_Tree
             BSTNode parentNode = null;
             BSTNode currentNode = root;
 
-            // Looking for a specified value
+            // Looking for a node with the value specified and its parent
             while (currentNode.Value != value)
             {
                 if (value > currentNode.Value)
@@ -105,38 +105,70 @@ namespace BST_Tree
             // Case 1: Deleting a node with no children
             if ((currentNode.LeftNode is null) && (currentNode.RightNode is null))
             {
-                if (parentNode.LeftNode == currentNode)
+                // Sub-case 1: the node being deleted is the root
+                if (parentNode is null)
                 {
-                    parentNode.LeftNode = null;
+                    root = null;
                 }
                 else
                 {
-                    parentNode.RightNode = null;
+                    if (parentNode.LeftNode == currentNode)
+                    {
+                        parentNode.LeftNode = null;
+                    }
+                    else
+                    {
+                        parentNode.RightNode = null;
+                    }
                 }
                 _count--;
 
                 return true;
             }
 
-            // Case 2: Deleting a node with 1 child- No LEFT child
-            if ((currentNode.LeftNode is null) && !(currentNode.RightNode is null))
+            // Case 2: Deleting a node with 2 children
+            if (!(currentNode.LeftNode is null) && !(currentNode.RightNode is null))
             {
-                parentNode.RightNode = currentNode.RightNode;
+                BSTNode minNode= FindMinNode(currentNode);
+                BSTNode minNodeRightChild = minNode.RightNode;
+                int minNodeValue = minNode.Value;
+
+                BSTNode parentMinNode = null;
+
+                // Temporary node to find a parent node of the minimum node
+                BSTNode tmpNode = currentNode;
+                // Looking for a parent of the MinimumNode
+                while (tmpNode.Value != minNodeValue)
+                {
+                    if (minNodeValue > currentNode.Value)
+                    {
+                        parentMinNode = tmpNode;
+                        tmpNode = tmpNode.RightNode;
+                    }
+                    else
+                    {
+                        parentMinNode = tmpNode;
+                        tmpNode = tmpNode.LeftNode;
+                    }
+                }
+
+                // Now we have all necessary information to delete a node
+                
+                // Step 1: Point left child of Min Node's parent to the Min Node's right child
+                parentMinNode.LeftNode = minNodeRightChild;
+
+                // Step 2: Setup left and right children of the minimum node to the children of the node being deleted
+                minNode.LeftNode= currentNode.LeftNode;
+                minNode.RightNode= currentNode.RightNode;
+
+                // Step 3: Replace the current node with the Min node
+                currentNode= minNode;
+
+                // Adjust the nodes counter
                 _count--;
 
                 return true;
             }
-            // Case 3: Deleting a node with 1 child- No RIGHT child
-            if (!(currentNode.LeftNode is null) && (currentNode.RightNode is null))
-            {
-                parentNode.RightNode = currentNode.LeftNode;
-                _count--;
-
-                return true;
-            }
-
-            // Case 4: Deleting a node with 2 children
-
 
             return false;
         }
@@ -173,9 +205,8 @@ namespace BST_Tree
         /// </summary>
         /// <param name="startNode">Node to start with</param>
         /// <returns></returns>
-        private int GetMinimumForSubtree(BSTNode startNode)
+        private BSTNode FindMinNode(BSTNode startNode)
         {
-
             // Case 1: the subtree is empty
             if (startNode is null)
             {
@@ -190,7 +221,7 @@ namespace BST_Tree
                 currentNode = currentNode.LeftNode;
             }
 
-            return currentNode.Value;
+            return currentNode;
         }
 
         /// <summary>
@@ -200,7 +231,7 @@ namespace BST_Tree
         /// <exception cref="InvalidOperationException">Exception is thrown if the tree is empty</exception>
         public int GetMinimum()
         {
-            return GetMinimumForSubtree(root);
+            return FindMinNode(root).Value;
         }
 
         private int GetMaximumForSubtree(BSTNode startNode)

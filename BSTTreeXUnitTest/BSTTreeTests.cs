@@ -256,9 +256,8 @@ namespace BSTTreeXUnitTest
             bool deletionResults = testTree.Delete(14);
 
             Assert.True(deletionResults);
-            Assert.NotNull(testTree);
-            Assert.False(testTree.Contains(14));
             Assert.Equal((uint)11, testTree.Count);
+            Assert.False(testTree.Contains(14));
         }
 
         [Fact]
