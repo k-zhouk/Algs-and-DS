@@ -1,6 +1,7 @@
 using BST_Tree;
 using Xunit;
 using System;
+using System.IO;
 
 namespace BSTTreeXUnitTest
 {
@@ -228,10 +229,14 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(19);
 
             bool deletionResults = testTree.Delete(18);
-
             Assert.True(deletionResults);
-            Assert.NotNull(testTree);
             Assert.False(testTree.Contains(18));
+
+            // The node 18 should be replaced with the node 19 and it's parent is node 20
+            int? parentNode = testTree.FindParentNode(19);
+            Assert.Equal(20, parentNode);
+
+            // Final check- number of nodes in the tree
             Assert.Equal((uint)11, testTree.Count);
         }
 
@@ -255,9 +260,14 @@ namespace BSTTreeXUnitTest
 
             bool deletionResults = testTree.Delete(14);
 
+            int? parentValue = testTree.FindParentNode(13);
+
             Assert.True(deletionResults);
-            Assert.Equal((uint)11, testTree.Count);
             Assert.False(testTree.Contains(14));
+
+            Assert.Equal(15, parentValue);
+
+            Assert.Equal((uint)11, testTree.Count);
         }
 
         [Fact]
@@ -281,8 +291,19 @@ namespace BSTTreeXUnitTest
             bool deletionResults = testTree.Delete(15);
 
             Assert.True(deletionResults);
-            Assert.Equal((uint)11, testTree.Count);
             Assert.False(testTree.Contains(15));
+
+            // Checking the parents of the control nodes
+            // Parent for 18 should be 10
+            int? parentNode1 = testTree.FindParentNode(18);
+            Assert.Equal(10, parentNode1);
+
+            // Parent for 19 should be 20
+            int? parentNode2 = testTree.FindParentNode(19);
+            Assert.Equal(20, parentNode2);
+
+            // Final check- number of nodes in the tree
+            Assert.Equal((uint)11, testTree.Count);
         }
 
         [Fact]
@@ -304,22 +325,26 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(19);
 
             bool deletionResult = testTree.Delete(50);
-
             Assert.True(deletionResult);
-            Assert.Equal((uint)11, testTree.Count);
             Assert.False(testTree.Contains(50));
+
+            // The ndoe 55 becomes a new root and its parent is null
+            int? parentNode = testTree.FindParentNode(55);
+            Assert.Null(parentNode);
+
+            Assert.Equal((uint)11, testTree.Count);
         }
 
         [Fact]
         public void Group3_Deleting_Nodes_DeleteRootNodeWithLeftChildTest()
         {
+            // The right sub-tree of the tree is null
             BSTTree testTree = new();
 
             _ = testTree.Add(50);
             _ = testTree.Add(10);
             _ = testTree.Add(7);
             _ = testTree.Add(15);
-            _ = testTree.Add(55);
             _ = testTree.Add(20);
             _ = testTree.Add(14);
             _ = testTree.Add(13);
@@ -328,20 +353,41 @@ namespace BSTTreeXUnitTest
             _ = testTree.Add(19);
 
             bool deletionResult = testTree.Delete(50);
-
-            throw new Exception();
-
-            // Deletion is not working properly- wrong node becomes a root
-
             Assert.True(deletionResult);
-            Assert.Equal((uint)10, testTree.Count);
             Assert.False(testTree.Contains(50));
+
+            // After the deletion of the root, node 10 becomes a new root and it has no parent
+            int? parentNode = testTree.FindParentNode(10);
+            Assert.Null(parentNode);
+
+            // Final check- number of nodes in the tree
+            Assert.Equal((uint)9, testTree.Count);
         }
 
         [Fact]
         public void Group3_Deleting_Nodes_DeleteRootNodeWithRightChildTest()
         {
-            throw new NotImplementedException();
+            BSTTree testTree = new BSTTree();
+
+            _ = testTree.Add(10);
+            _ = testTree.Add(15);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            bool deletionResult = testTree.Delete(10);
+            Assert.True(deletionResult);
+            Assert.False(testTree.Contains(10));
+
+            // After the deletion of the root, node 15 becomes a new root and it has no parent
+            int? parentNode = testTree.FindParentNode(15);
+            Assert.Null(parentNode);
+
+            // Final check- number of nodes in the tree
+            Assert.Equal((uint)7, testTree.Count);
         }
         #endregion
 
@@ -533,7 +579,7 @@ namespace BSTTreeXUnitTest
         }
 
         [Fact]
-        public void Group6_Count_CountTreeTest()
+        public void Group6_Count_CountAfterAddingNodesTest()
         {
             BSTTree testTree = new();
 
@@ -553,6 +599,114 @@ namespace BSTTreeXUnitTest
             uint count = testTree.Count;
 
             Assert.Equal((uint)12, count);
+        }
+
+        [Fact]
+        public void Group6_Count_Count_AfterDeletingNoChildrenNodeTest()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            _ = testTree.Delete(7);
+            _ = testTree.Delete(13);
+            _ = testTree.Delete(19);
+            _ = testTree.Delete(22);
+            _ = testTree.Delete(55);
+
+            uint count = testTree.Count;
+
+            Assert.Equal((uint)7, count);
+        }
+
+        [Fact]
+        public void GRoup6_Count_CountAfterDeletingOneChildNodeTest()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            _ = testTree.Delete(60);
+            _ = testTree.Delete(14);
+            _ = testTree.Delete(18);
+
+            uint count = testTree.Count;
+
+            Assert.Equal((uint)9, count);
+        }
+        
+        [Fact]
+        public void GRoup6_Count_CountAfterDeletingTwoChildrenNodeTest()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            _ = testTree.Delete(15);
+            _ = testTree.Delete(10);
+
+            uint count = testTree.Count;
+
+            Assert.Equal((uint)10, count);
+        }
+        
+        [Fact]
+        public void GRoup6_Count_CountAfterDeletingRootTest()
+        {
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            _ = testTree.Delete(50);
+            _ = testTree.Delete(55);
+
+            uint count = testTree.Count;
+
+            Assert.Equal((uint)10, count);
         }
         #endregion
 
@@ -597,7 +751,43 @@ namespace BSTTreeXUnitTest
         [Fact]
         public void Group8_Print_PrintAscendingEmptyTreeTest()
         {
-            throw new NotImplementedException();
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+
+            BSTTree testTree = new();
+
+            testTree.PrintAscending();
+
+            Assert.Equal("The tree is empty", sw.ToString().Trim());
+        }
+
+        [Fact]
+        public void Group8_Print_PrintAscendingOneNodeTree()
+        {
+            StringWriter sw = new();
+            Console.SetOut(sw);
+
+            // Arrange
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            // Act
+            testTree.PrintAscending();
+
+            // Assert
+            Assert.Equal("", sw.ToString().Trim())
         }
 
         [Fact]
@@ -609,6 +799,23 @@ namespace BSTTreeXUnitTest
         [Fact]
         public void Group8_Print_PrintDescendingEmptyTreeTest()
         {
+            StringWriter sw = new();
+            Console.SetOut(sw);
+
+            BSTTree testTree = new();
+
+            testTree.PrintDescending();
+
+            Assert.Equal("The tree is empty", sw.ToString().Trim());
+        }
+
+        [Fact]
+        public void Group8_Print_PrintDescendingOneNodeTree()
+        {
+            // Arrange
+            // Act
+            // Assert
+
             throw new NotImplementedException();
         }
 

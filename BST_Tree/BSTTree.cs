@@ -78,20 +78,20 @@ namespace BST_Tree
                 return false;
             }
 
-            BSTNode parentNode = null;
+            BSTNode parentNode = root;
             BSTNode currentNode = root;
 
             // Looking for a node with the value specified and its parent
             while (currentNode.Value != value)
             {
+                parentNode = currentNode;
+
                 if (value > currentNode.Value)
                 {
-                    parentNode = currentNode;
                     currentNode = currentNode.RightNode;
                 }
                 else
                 {
-                    parentNode = currentNode;
                     currentNode = currentNode.LeftNode;
                 }
 
@@ -105,8 +105,8 @@ namespace BST_Tree
             // Case 1: Deleting a node with no children
             if ((currentNode.LeftNode is null) && (currentNode.RightNode is null))
             {
-                // Sub-case 1: the node being deleted is the root
-                if (parentNode is null)
+                // The parentNode and currentNode are equal is the root ie being deleted
+                if (parentNode == currentNode)
                 {
                     root = null;
                 }
@@ -121,26 +121,71 @@ namespace BST_Tree
                         parentNode.RightNode = null;
                     }
                 }
-                _count--;
 
+                _count--;
                 return true;
             }
 
-            // Case 2: Deleting a node with 2 children
+            // Case 2: Deleting a node with 1 child only
+            if (!(currentNode.LeftNode is null) && (currentNode.RightNode is null))
+            {
+                // parentNode is equal to currentNode if the root is being deleted
+                if (parentNode == currentNode)
+                {
+                    root = parentNode.LeftNode;
+                }
+
+                if (parentNode.LeftNode == currentNode)
+                {
+                    parentNode.LeftNode = currentNode.LeftNode;
+                }
+
+                if (parentNode.RightNode == currentNode)
+                {
+                    parentNode.RightNode = currentNode.LeftNode;
+                }
+
+                _count--;
+                return true;
+            }
+
+            if ((currentNode.LeftNode is null) && !(currentNode.RightNode is null))
+            {
+                // parentNode is equal to currentNode if the root is being deleted
+                if (parentNode == currentNode)
+                {
+                    root = parentNode.RightNode;
+                }
+
+                if (parentNode.LeftNode == currentNode)
+                {
+                    parentNode.LeftNode = currentNode.RightNode;
+                }
+
+                if (parentNode.LeftNode == currentNode)
+                {
+                    parentNode.RightNode = currentNode.RightNode;
+                }
+
+                _count--;
+                return true;
+            }
+
+            // Case 3: Deleting a node with 2 children
             if (!(currentNode.LeftNode is null) || !(currentNode.RightNode is null))
             {
-                BSTNode minNode= FindMinNode(currentNode);
-                BSTNode minNodeRightChild = minNode.RightNode;
+                BSTNode minNode = FindMinNode(currentNode.RightNode);
                 int minNodeValue = minNode.Value;
+                BSTNode minNodeRightChild = minNode.RightNode;
 
+                // Looking for a parent node of a minimum node
                 BSTNode parentMinNode = null;
-
-                // Temporary node to find a parent node of the minimum node
                 BSTNode tmpNode = currentNode;
+
                 // Looking for a parent of the MinimumNode
                 while (tmpNode.Value != minNodeValue)
                 {
-                    if (minNodeValue > currentNode.Value)
+                    if (minNodeValue > tmpNode.Value)
                     {
                         parentMinNode = tmpNode;
                         tmpNode = tmpNode.RightNode;
@@ -153,19 +198,19 @@ namespace BST_Tree
                 }
 
                 // Now we have all necessary information to delete a node
-                
+
                 // Step 1: Point left child of Min Node's parent to the Min Node's right child
                 parentMinNode.LeftNode = minNodeRightChild;
 
                 // Step 2: Setup left and right children of the minimum node to the children of the node being deleted
-                minNode.LeftNode= currentNode.LeftNode;
-                minNode.RightNode= currentNode.RightNode;
+                minNode.LeftNode = currentNode.LeftNode;
+                minNode.RightNode = currentNode.RightNode;
 
                 // Step 3: Replace a node of the parent node with the Min node
                 // Check if we are deleting the root node. In this case we will not have the parent node
-                if(root.Value== value)
+                if (root.Value == value)
                 {
-                    root= minNode;
+                    root = minNode;
                 }
                 else // else we are deleting non-root node
                 {
@@ -264,6 +309,36 @@ namespace BST_Tree
             return currentNode.Value;
         }
 
+        // Should not be public. Used for unit tests
+        public int? FindParentNode(int value)
+        {
+            BSTNode parentNode = null;
+            BSTNode currentNode = root;
+
+            while (currentNode.Value != value)
+            {
+                if (value < currentNode.Value)
+                {
+                    parentNode = currentNode;
+                    currentNode = currentNode.LeftNode;
+                }
+                else
+                {
+                    parentNode = currentNode;
+                    currentNode = currentNode.RightNode;
+                }
+            }
+
+            if (parentNode is null)
+            {
+                return null;
+            }
+            else
+            {
+                return parentNode.Value;
+            }
+        }
+
         /// <summary>
         /// Method returns a node with the maximum value
         /// </summary>
@@ -290,10 +365,17 @@ namespace BST_Tree
         /// </summary>
         public void PrintAscending()
         {
+            if (root is null)
+            {
+                Console.WriteLine("The tree is empty");
+                return;
+            }
+
             BSTNode currentNode = root;
 
             Travers(currentNode);
 
+            // Internal function here, because it's a recursion function
             void Travers(BSTNode node)
             {
                 if ((currentNode.LeftNode is null) && currentNode.RightNode is null)
@@ -319,7 +401,11 @@ namespace BST_Tree
         /// </summary>
         public void PrintDescending()
         {
-            throw new NotImplementedException();
+            if (root is null)
+            {
+                Console.WriteLine("The tree is empty");
+                return;
+            }
         }
         #endregion
 
