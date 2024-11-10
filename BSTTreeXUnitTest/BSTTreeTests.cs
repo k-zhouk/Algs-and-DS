@@ -263,7 +263,26 @@ namespace BSTTreeXUnitTest
         [Fact]
         public void Group3_Deleting_Nodes_DeleteNodeWithTwoChildrenTest()
         {
-            throw new NotImplementedException();
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            bool deletionResults = testTree.Delete(15);
+
+            Assert.True(deletionResults);
+            Assert.Equal((uint)11, testTree.Count);
+            Assert.False(testTree.Contains(15));
         }
 
         [Fact]
@@ -287,7 +306,6 @@ namespace BSTTreeXUnitTest
             bool deletionResult = testTree.Delete(50);
 
             Assert.True(deletionResult);
-            Assert.NotNull(testTree);
             Assert.Equal((uint)11, testTree.Count);
             Assert.False(testTree.Contains(50));
         }
@@ -295,7 +313,29 @@ namespace BSTTreeXUnitTest
         [Fact]
         public void Group3_Deleting_Nodes_DeleteRootNodeWithLeftChildTest()
         {
-            throw new NotImplementedException();
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            bool deletionResult = testTree.Delete(50);
+
+            throw new Exception();
+
+            // Deletion is not working properly- wrong node becomes a root
+
+            Assert.True(deletionResult);
+            Assert.Equal((uint)10, testTree.Count);
+            Assert.False(testTree.Contains(50));
         }
 
         [Fact]

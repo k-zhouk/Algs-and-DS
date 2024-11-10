@@ -127,7 +127,7 @@ namespace BST_Tree
             }
 
             // Case 2: Deleting a node with 2 children
-            if (!(currentNode.LeftNode is null) && !(currentNode.RightNode is null))
+            if (!(currentNode.LeftNode is null) || !(currentNode.RightNode is null))
             {
                 BSTNode minNode= FindMinNode(currentNode);
                 BSTNode minNodeRightChild = minNode.RightNode;
@@ -161,12 +161,23 @@ namespace BST_Tree
                 minNode.LeftNode= currentNode.LeftNode;
                 minNode.RightNode= currentNode.RightNode;
 
-                // Step 3: Replace the current node with the Min node
-                currentNode= minNode;
+                // Step 3: Replace a node of the parent node with the Min node
+                // Check if we are deleting the root node. In this case we will not have the parent node
+                if(root.Value== value)
+                {
+                    root= minNode;
+                }
+                else // else we are deleting non-root node
+                {
+                    if (parentNode.LeftNode.Value == value)
+                    {
+                        parentNode.LeftNode = minNode;
+                    }
+                    else parentNode.RightNode = minNode;
+                }
 
-                // Adjust the nodes counter
+                // Adjust the nodes counter and return
                 _count--;
-
                 return true;
             }
 
