@@ -378,20 +378,13 @@ namespace BST_Tree
             // Internal function here, because it's a recursion function
             void Travers(BSTNode node)
             {
-                if ((currentNode.LeftNode is null) && currentNode.RightNode is null)
+                if (node is null)
                 {
-                    Console.Write(currentNode.Value + " ");
                     return;
                 }
-                else if (currentNode.LeftNode is null)
-                {
-                    currentNode = currentNode.RightNode;
-                }
-                else
-                {
-                    currentNode = currentNode.LeftNode;
-                }
-                Travers(currentNode);
+                Travers(node.LeftNode);
+                Console.Write(node.Value + " ");
+                Travers(node.RightNode);
             }
             // throw new NotImplementedException();
         }
@@ -405,6 +398,22 @@ namespace BST_Tree
             {
                 Console.WriteLine("The tree is empty");
                 return;
+            }
+
+            BSTNode currentNode = root;
+
+            Traverse(currentNode);
+
+            void Traverse(BSTNode node)
+            {
+                if (node is null)
+                {
+                    return;
+                }
+
+                Traverse(node.RightNode);
+                Console.Write(node.Value + " ");
+                Traverse(node.LeftNode);
             }
         }
         #endregion
@@ -432,6 +441,11 @@ namespace BST_Tree
         /// <returns>Returns the height of the tree as an uint number</returns>
         private uint GetHeigh()
         {
+            if (_count == 0)
+            {
+                return 0;
+            }
+
             throw new NotImplementedException();
         }
         #endregion

@@ -656,7 +656,7 @@ namespace BSTTreeXUnitTest
 
             Assert.Equal((uint)9, count);
         }
-        
+
         [Fact]
         public void GRoup6_Count_CountAfterDeletingTwoChildrenNodeTest()
         {
@@ -682,7 +682,7 @@ namespace BSTTreeXUnitTest
 
             Assert.Equal((uint)10, count);
         }
-        
+
         [Fact]
         public void GRoup6_Count_CountAfterDeletingRootTest()
         {
@@ -771,6 +771,24 @@ namespace BSTTreeXUnitTest
             BSTTree testTree = new();
 
             _ = testTree.Add(50);
+
+            // Act
+            testTree.PrintAscending();
+
+            // Assert
+            Assert.Equal("50 ", sw.ToString());
+        }
+
+        [Fact]
+        public void Group8_Print_PrintAscendingTreeTest()
+        {
+            StringWriter sw = new();
+            Console.SetOut(sw);
+
+            // Arrange
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
             _ = testTree.Add(10);
             _ = testTree.Add(60);
             _ = testTree.Add(7);
@@ -787,13 +805,7 @@ namespace BSTTreeXUnitTest
             testTree.PrintAscending();
 
             // Assert
-            Assert.Equal("", sw.ToString().Trim())
-        }
-
-        [Fact]
-        public void Group8_Print_PrintAscendingTreeTest()
-        {
-            throw new NotImplementedException();
+            Assert.Equal("7 10 13 14 15 18 19 20 22 50 55 60 ", sw.ToString());
         }
 
         [Fact]
@@ -812,17 +824,43 @@ namespace BSTTreeXUnitTest
         [Fact]
         public void Group8_Print_PrintDescendingOneNodeTree()
         {
-            // Arrange
-            // Act
-            // Assert
+            StringWriter sw = new();
+            Console.SetOut(sw);
 
-            throw new NotImplementedException();
+            BSTTree testTree = new(50);
+
+            testTree.PrintDescending();
+
+            Assert.Equal("50", sw.ToString().Trim());
         }
 
         [Fact]
         public void Group8_Print_PrintDescendingTreeTest()
         {
-            throw new NotImplementedException();
+            StringWriter sw = new();
+            Console.SetOut(sw);
+
+            // Arrange
+            BSTTree testTree = new();
+
+            _ = testTree.Add(50);
+            _ = testTree.Add(10);
+            _ = testTree.Add(60);
+            _ = testTree.Add(7);
+            _ = testTree.Add(15);
+            _ = testTree.Add(55);
+            _ = testTree.Add(20);
+            _ = testTree.Add(14);
+            _ = testTree.Add(13);
+            _ = testTree.Add(18);
+            _ = testTree.Add(22);
+            _ = testTree.Add(19);
+
+            // Act
+            testTree.PrintDescending();
+
+            // Assert
+            Assert.Equal("60 55 50 22 20 19 18 15 14 13 10 7 ", sw.ToString());
         }
         #endregion
 
